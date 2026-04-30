@@ -1,0 +1,34 @@
+{
+  "type": "configuration",
+  "values": {
+    // Enables or deactivates the time suggestion options in time edit page
+    "WorkStatusTimeInput": "enable",
+    // Defines the radius of the geofence in meters.
+    "GeoFenceRadius": 150,
+    // The GeoFence parameter controls whether the geofencing feature is activated. When set to enable, geofencing functionality is enabled.
+    "GeoFence": "enable",
+    // The GeoFenceTimeInput parameter allows the logs of geofencing events to be shown on the Edit page for time reporting purposes. If enable, the geofence logs will be displayed to assist in time reporting entries.
+    "GeoFenceTimeInput": "enable",
+    // GeoFenceLog is a configuration used to record the logs for geofence events (entering and leaving the geofence)
+    "GeoFenceLog": "enable",
+    // Enables or deactivates resource geo location tracking by motion detection.
+    //If active, every movement of the FSE over a distance larger than GeolocationDistance generates a new location information.
+    "FSELocation": "enable",
+    // Specifies the distance (in meters) the user has to move, before the location is updated. Sets 'distance' value in TrackingOptions.
+    "FSELocationDistance": 100,
+    // Specifies if and how detailed the FSE location (motion) history is stored in ResourceInfo
+    // Values: full | bucket | span | off
+    "FSELocationLog": "full",
+    // Specifies the accuracy of the geolocation information. The values map directly to the respective values in the platform.
+    // Values: highAccuracy | balancedPowerAccuracy | lowPower
+    "GeoLocationAccuracy": "highAccuracy",
+    // Specifies the maximum time between two consecutive motion updates, so they are interpreted as a continuos movement.
+    // Time interval in minutes
+    "MotionSequenceInterval": 5,
+    // Specifies if and how the location is recorded in the resource object and the work status log, when the appointment work status changes.
+    // Value: geo | IBL | off
+    "WorkStatusLocation": "geo",
+    //  activate work status history- Enables or deactivates recording of the work status history.
+    "WorkStatusLog": "enable"
+  }
+}

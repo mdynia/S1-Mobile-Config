@@ -1,0 +1,7 @@
+{
+    "type": "configuration",
+    "values": {
+      // OrdersAtLocation defines wether "Orders at Location" menu item should be shown or not, values: enable, disable (= default)
+      "OrdersAtLocation": "enable"
+    }
+}

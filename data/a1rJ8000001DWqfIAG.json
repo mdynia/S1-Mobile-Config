@@ -1,0 +1,20 @@
+{
+    "language": "xx",
+
+    "type": "departureCheckNotificationConfig",
+
+    "values": {
+
+      "departureCheckNotification": {
+
+
+        "mode": "standard",
+
+
+        "numberOfTimesDialogShown": 1
+
+      }
+
+    }
+
+  }

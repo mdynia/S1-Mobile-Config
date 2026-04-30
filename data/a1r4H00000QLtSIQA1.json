@@ -1,0 +1,3318 @@
+// This configuration activates all features (as much as possible)
+// Currently it serves as "the variant" against regression is tested
+// New ways to config needs to be added here
+[
+  {
+    // --------------------------------------------------------------------------------
+    //
+    // General Custom (System) Settings
+    //
+    "type": "customSettings",
+    "values": {
+      "debug": "0",
+      "debug.tracelevel": "3",
+      // See service1-mobile-common\source\utils\logging\LoggingConfiguration.d.ts and related for allowed values.
+      "logging": {
+        // see @LoggingTag for supported values, e.g. Module.Common, Module.Legacy, Package.Standard....
+        "enabledTags": [
+          "*" // all tags
+        ],
+        "formatting": {
+          "arrayStyle": "stringify", // fallback: 'stringify', 'flatten'
+          "formatJSON": {
+            // false or {indentation: number} -> fallback is false
+            "indentation": 2
+          }
+        },
+        "minimumSeverity": 3 // 1 <=> verbose, 2 <=> debug, 3 <=> info, 4 <=> warning, 5 <=> critical
+      },
+      "basic": {
+        "barcode": {
+          "formats": [
+            // all possible (supported) barcode Formats (see BARCODE_FORMATS_ALL)
+            "AZTEC",
+            "CODABAR",
+            "CODE_39",
+            "CODE_93",
+            "CODE_128",
+            "DATA_MATRIX",
+            "EAN_8",
+            "EAN_13",
+            "ITF",
+            "MAXICODE",
+            "PDF_417",
+            "QR_CODE",
+            "RSS_14",
+            "RSS_EXPANDED",
+            "UPC_A",
+            "UPC_E",
+            "UPC_EAN_EXTENSION",
+            "MSI",
+            "PLESSEY",
+            "IMB"
+          ]
+        },
+        "block": {
+          "material": {
+            // avoid using part without articledetail per country (of technican) although it is shown
+            //
+            "country": [
+              true
+            ]
+          }
+        },
+        // hide buttons on detail page: "RETURN", "TRANSFER", "ORDER"
+        // order(line) related operation e.g. 'Order Material' (ORDER),
+        //   'Reserved parts next appointment'
+        //   (ORDERLINE_PROPOSAL) or show quotation lines (ORDERLINE_QUOTATION)
+        // For material source: 'customerOwned'
+        //  Hide stock types: 'stock.type=' with given stock type after = to hide these types
+        //  For stock type: 'MobileStock', SparePartsCentral', 'Others'
+        //  Do not show stocks with other plants then engineers stock has: 'otherPlants'
+        // For no alert on missing stock: 'missingPart'
+        // Set 'stock.source.default=customerOwned' to have 'customerOwned' as default for material source, instead of standard 'engineerStock'
+        "hide_material_operation": [
+          /*
+          // StockModule - Button in StockItemDetails (TRANSFER, ORDER, RETURN)
+          "TRANSFER",
+          "ORDER",
+          "RETURN",
+          // hide tags for
+          "missingPart",
+          "joblist.tag.partsOrdered",
+          // hide stock for consumption by type
+          "customerOwned",
+          "stock.source.default=customerOwned", // set 'customerOwned' as default for material source (not active if "customerOwned" set)
+          "stock.type=MobileStock",
+          "stock.type=SparePartsCentral",
+          "stock.type=Others",
+          "otherPlants",                     
+          "ORDERLINE_PROPOSAL"  // hide proposal. Since 05.2025 shopping card menu item to reserve/order parts is hidden too
+          */
+        ],
+        "hide_pages": [
+          "jobFastTrackTab",
+          "outline.attachmentButton",
+          "outline.newtonDocumentsButton",
+          "OpenOnlinePageSalesforceServiceConsole",
+          "OpenOnlinePageSalesforceDashboardView",
+          "followUpAppointmentComponents.editPage",
+          "OpenOnlinePageFollowUpAppointment"
+        ],
+        "modules": [
+          "jobs",
+          "timesheet",
+          // simpler Version with clock-in, clock-out
+          //"timesheetbasic",
+          "material",
+          "resourceEquipmentView",
+          "online",
+          // configuration/setup "paste JSON" / with active "debug" always shown
+          "setup",
+          "notification"
+        ],
+        "tabs": {
+          // Floating Action Button (FAB) and Quick Action Button (QAB) (T-25262):
+          // "part", "times", "service", "attachments", "checklist", "repaircodes", "service_item"  Default: all FAB are active.
+          "fab": [
+            "part",
+            "times",
+            "service",
+            "attachments",
+            "checklist",
+            "repaircodes",
+            "service_item"
+          ],
+          // Enable legacy (search bar always shown) (T-25262): ["part", "service", "repaircodes", "service_item"]. Default: empty/deactive
+          "legacy": {
+            "add": []
+          }
+        },
+        "view": {
+          // hide prices overall
+          "prices": [
+            true
+          ]
+        }
+      },
+      "order": {
+        "finish": {
+          "followup": {
+            //"mode": ["twoStep"], // only works for coke ? for other projects change 'finishFlowFollowUpSelectionImplementation' below at the end.
+            // conclusion - cancelled
+            "cancelled": [
+              // -> default
+              "2902",
+              "2915"
+              // <- default
+            ],
+            // conclusion - completed
+            "completed": [
+              // -> default
+              "2901",
+              "2902",
+              "2903",
+              "2904",
+              "2905",
+              "2915",
+              "2950",
+              "2951",
+              "2952",
+              "2953",
+              "2954",
+              "2955"
+              // <- default
+            ],
+            // conclusion - rejected
+            "rejected": [
+              // -> default
+              "2903"
+              // <- default
+            ],
+            "supportcompleted": [
+              // -> default
+              "2902",
+              "2903",
+              "2915",
+              "2957"
+              // <- default
+            ]
+          },
+          "hide": [
+            ""
+          ], //e.g ["invoice"] => hide invoice step in finish flow, unconditionally
+          "wizard": {
+            "saveonback": "1"
+          }
+        }
+      },
+      "parts": {
+        "search": {
+          // show fields in article result list
+          "fields": [
+            // "listprice" --> deprecated due to priceCalculation / shown in OrderLineEditPage
+            "serialized",
+            "articlesearch",
+            "class",
+            "type"
+          ]
+        }
+      },
+      "services": {
+        "search": {
+          // show fields in article result list
+          "fields": [
+            // "listprice" --> deprecated due to priceCalculation / shown in OrderLineEditPage
+            "serialized",
+            "articlesearch",
+            "class",
+            "type"
+          ]
+        }
+      },
+      "view": {
+        "filter": {
+          "job_list": [
+            "currentJob",
+            "today",
+            "tonight",
+            "tomorrow",
+            "nextSevenDays",
+            "lastSevenDays",
+            "yesterday",
+            "notCompleted",
+            "completed",
+            "all",
+            "preCheck",
+            "preChecked"
+          ],
+          "jobs": {
+            // check for empty lists and take fallback
+            "fallback": [
+              "currentJob",
+              "today",
+              "notCompleted"
+            ]
+          },
+          // master solution - blacklist
+          "resource_appointment_types_hidden": [
+            // default only hide breaks
+            "7404"
+          ],
+          // original product solution - whitelist
+          "resource_appointment_types_to_show": [
+            "7449"
+          ]
+        },
+        "ib": {
+          "fields": [
+            // switch to name instead of description (text_de, ...)
+            "xx-productmodel.name",
+            "serialno.trim",
+            "idext",
+            "building",
+            "floor",
+            "room",
+            "name"
+          ]
+        },
+        "job": {
+          // list of status to hide appointments with this status in some filters. Suggested value: "5507" cancelled/storniert
+          "hide_status": [],
+          "important": {
+            // Name of checklists shown as cards on separate Tab (importantChecklistTabTabExtension)
+            "checklists": []
+          }
+        },
+        "jobheader": {
+          // default: ["AP.startend", "SR.name"] (default also actived if only 1 field is defined)
+          // additional or other fields in Job Header:
+          // ["ORD.type", "ORD.name", "IB.idext", "IB.idint", "IB.prodName"]
+          // first field = line1, second field = line2 BOLD, other added to line2 delimted " • "
+          // For backward compatibiliy: if 'view.order.fields' includes deprecated 'tab' it will be added as 'ORD.name'
+          "fields": [
+            "AP.startend",
+            "SR.name"
+          ]
+        },
+        "order": {
+          "enable": {
+            // field readonly
+            "invoicing_type": [
+              true
+            ]
+          },
+          // deprecated: 'tab', use 'ORD.name' in jobheader
+          // Note: remove or comment, any property below to disable it in the card. 
+          "fields": [
+            "tab", // ORD.Name #123 in Title of opened Job
+            // Job Card Overview Details
+            "name", // ORD.Name #123 in Job List
+            "drivetime",
+            "counterinfo",
+            "errortext",
+            "internalinfo",
+            "description",
+            "cardAdditionalCustomerInfo",
+            "priority",
+            "client",
+            "tagAdditionalCustomerInfo",
+            "tagInternalInfo",
+            "tagDescription",
+            "tagErrorText",
+            //"customerWish",
+            "tagCriticalHistory",
+            "showProperties", // show properties in job card.
+            "showRemarks" // show remarks in job card
+          ],
+          "search": [
+            // activate search bar in ALL filter
+            "#ON",
+            // switch to new "inline" mode
+            "#INLINE",
+            // suppress filter in ALL view
+            "!xx-all"
+          ]
+        },
+        "orderitem": {
+          "fields": [
+            // in addition to room/building ...
+            "errortext",
+            "idint", // not yet included due to T-42918 
+            "idext"
+          ]
+        },
+        "orderline": {
+          "edit": {
+            // allow decimals for Qty / fallback if no fsoMaterialUnitQtyRules is defined
+            // also used for discounts
+            "qty_decimals": [
+              // default
+              2
+            ]
+          },
+          "fields": [
+            // default
+            "invoicingtype",
+            // show (selected) stock
+            "stock",
+            // special for BG1, stock used to identify technician (two-man-job)
+            "stockservice"
+          ]
+        },
+        // Stock Module
+        "stockitem": {
+          // list of status for booked movements
+          "booked": {
+            "status": [
+              // default
+              "5403",
+              // default
+              "5408"
+            ]
+          },
+          // list of status for pending movements
+          "pending": {
+            "status": [
+              // default
+              "5402",
+              // default
+              "5407"
+            ]
+          }
+        },
+        "timereport": {
+          // time tab/timesheet view: fields for time report entry/card
+          // example values: ["IB.idext", "IB.idint", "IB.building", "IB.room", "IB.floor", "IB.serialno", "IB.serialno.trim", "type", "duration", "distanceInline", "ORD.name"]
+          // deprecated: "appId", "ORD.name.footer", "ORD.account", "name", "start". Instead of "appId", "ORD.name.footer" use "ORD.name"
+          // default (if not set): ["type", "mileage", "description", "duration", "distanceInline", "ORD.name"]
+          "fields": [
+            "type",
+            "mileage",
+            "description",
+            "duration",
+            "type",
+            "distanceInline",
+            "ORD.name",
+            "compensationType"
+          ]
+        }
+      }
+    }
+  },
+  {
+    // --------------------------------------------------------------------------------
+    //
+    // Timesheet / Timeedit
+    // Some fields marked as @deprecated/unused since 2023.112
+    //
+    "type": "configTimeSheet",
+    "values": {
+      "break": {
+        /**
+        *"optional" is the default value if not configured and means the "old" behaviour, where the user decides if he enters breaks and they're not validated
+        * "mandatory" means, that the user has to enter a break and that it's validated, that he does so
+        */
+        "breakType": "mandatory",
+        /**
+        * The amount of hours of work after break becomes mendatory
+         */
+        "breakMinMinutes": 30,
+        /**
+         * The minimum amoutn of breaks  after breakAfterHours working hours.
+         */
+        "breakAfterHours": 6
+      },
+      "overTime": {
+        /**
+     * "disabled" is the default value if not configured and means the "old" behavior, where the field is not displayed
+     * "optional" means that the field is displayed, but the user decides if they enter an overtime reason and it's not validated
+     * "mandatory" means that the field is displayed and the user has to enter an overtime reason, and it's validated, that they do so
+     */
+        "overtimeReason": "enable",
+        /**
+     * The limit after Overtime Reason becomes mandatory.
+     */
+        "overtimeReasonAfterHours": 10
+      },
+      "workingHoursRelatedCategories": {
+        "type": "include",
+        "values": [
+          "work",
+          "travel"
+        ]
+      },
+      // time button at the end (not at top or FAB) or at top:"recommended" | "legacy"
+      "addingTimesBehavior": "recommended",
+      // which calendar day is visible in job tab: "today" | "lastTimeSheet"
+      "calendarDayInJob": "lastTimeSheet",
+      // allowed days in past for creating an open day, 0 = today (default), 5 = 5 days in the past, -1 = disabled (default 0)
+      // works as expected (but mode must be 'strict')
+      "clockInDays": 0,
+      // "timesheet" -> On commit, all time entries of the timesheet are closed
+      // "job" -> job-related time entries are closed when finishing a job. After a job is finished, no new times can be added to that job.
+      "commit": "job",
+      // allow only a date in month limit relative to today
+      "dateMonthLimit": 1,
+      // steps for + - buttons (only used for field DistanceOrMilageEdit)
+      "distanceGrid": 1,
+      // "distance" | "mileage" | "disable"
+      "distanceTracking": "mileage",
+      // true -> explicit day open is mandatory before creating a time report entry (startEndClockIn should be active). Additionally for today the actual time taken as suggested end time (if not less then start)
+      "forceClockIn": false,
+      // suggestion display mode in job tab: "off" | "legacy";
+      "jobSuggestionMode": "off",
+      // "timeCategories": "normal" | "jobwork" | "jobTravel" with arry of report types @deprecated, use fsoTimeReportTypes
+      // "fsoTypes": configured report types, default empty. @deprecated, use fsoTimeReportTypes. Sample:
+      // "jobSuggestionMode": "off", @deprecated
+      // "shifts": 1, @deprecated
+      // "whitelistedFollowUpCodes", still in use. Planned to be replaced by fsoFollowUp2Types.validate.timereport.types
+      // "required"."description", @deprecated
+      // enable/disable validations in job finish flow, default = 'on'
+      "jobValidations": "on",
+      // max gap length in hours / max hours per timesheet
+      "maxTimesheetDuration": 24,
+      // defines the rounding grid. 5,10,15 -> rounding to minutes
+      "minuteGrid": 15,
+      //toggle compensation type showing up in time reports
+      "compensationType": "enable",
+      // primary configuration modes: "simple" | "lenient" | "strict"
+      "mode": "strict",
+      // start and end time of timesheet is set "auto" | "manual"
+      "startEnd": "auto",
+      // 'list' -> device name is shown in a multiple lines
+      // 'inline' -> device name is shown in a same line
+      "timeReportEntryType": "list",
+      // show device name in time report entry
+      "enableDeviceSpecificTimeReporting": true,
+      "allowEmptyDeviceSelection": true,
+      "preventDevicePreselectionInJobContextOfSingleDeviceJobs": true,
+      // "enable" | "disable" clockIn/clockOut buttons
+      "startEndClockIn": "enable",
+      // max gap size in hours
+      "timesheetSplitDuration": 12,
+      // max number of open time sheets for user. Min is 0 for deactivated (default). 1: Only one day can be open. Dates for other days are not possible to save, see T-27389
+      "uncommittedTimeSheetLimit": 3,
+      // uncommitedTimesMaxPeriod, defines for how many days in the past, the app should look and warn for open timesheets. Max: 30 days
+      "uncommittedTimesMaxPeriod": 27,
+      "activitiesAsTimeReportType": "combined"
+    }
+  },
+  // --------------------------------------------------------------------------------
+  //
+  // Config for always showing the device list tab, even if there is a single orderItem.
+  //
+  {
+    "type": "deviceListTabConfig",
+    "values": {
+      "showAlwaysDeviceList": true // show or hide devicelist tab even if there is a single orderItem, values: true, false, default <=> false
+    }
+  },
+  // --------------------------------------------------------------------------------
+  //
+  // Config for always showing the Add Devices page.
+  //
+  {
+    "type": "addDevicesConfig",
+    "values": {
+      "showAlways": true // show or hide AddDevices tab even if there is a single AddDevice, values: true, false, default <=> false
+    }
+  },
+  // --------------------------------------------------------------------------------
+  //
+  // Config for enabling the use of partial proposals - MOB-42701
+  // without setting this flag to true, the partial proposal feature is disabled
+  //
+  {
+    "type": "PartialMaterialProposalConfig",
+    "values": {
+      "partialProposalsEnabled": true // enables partial proposal handling, values: true, false, default <=> false
+    }
+  },
+  // --------------------------------------------------------------------------------
+  //
+  // Innotec : Activity Selection for parts/product is mandatory
+  // PA FSM: Activity selection is optional for unplanned parts/products
+  //
+  {
+    "type": "ActivitySelectionConfig",
+    "values": {
+      "isActivitySelectionOptional": true // enables activity selection, values: true, false, default <=> false
+    }
+  },
+  // --------------------------------------------------------------------------------
+  //
+  // Config for notifications
+  //
+  {
+    "type": "configNotification",
+    "values": {
+      // features "popup Notification" is implicitly used if backend creates MOBILE_POPUP_NOTIFICATION (SCMessage.Type)
+      "popupNotifications": {
+        "$default": {
+          // convenient shortcut to define fallback values for properties for all events
+          /** time frame configuration, starttime of appointment of notification is within this time frame
+           * null <=> no time frame filter, 0 <=> show notification only if appointment is for today,
+           * [-3, 2] <=> show notification if appointment is at least 3 days in the past or 2 days in the future */
+          "displayDays": 0,
+          /** messages older than this (unit days) are not considered, SCMessage.LastModifiedDate
+           *  this applies additionally to further time frame based filtering
+           *  0 <=> no limit on message age
+           *  1 is default */
+          "maxAgeInDays": 1
+        },
+        //
+        // "AppointmentCancelled": {
+        //   "displayDays": 0,
+        //   "maxAgeInDays": 1
+        // },
+        // "AppointmentInserted": {
+        //   "displayDays": 0,
+        //   "maxAgeInDays": 1
+        // }
+        "mode": "enabled" // enables or disables the notifications, options : 'enabled' or 'disabled'
+      }
+    }
+  },
+  // --------------------------------------------------------------------------------
+  //
+  // Config for Quotation
+  //
+  {
+    "type": "quotation",
+    "values": {
+      // Config for quotation
+      "jobFinishFlow": {
+        "showSummaryCard": false, // true: show summary card in job finish flow, false: do not show summary card
+        "ensureFinishJobWithValidQuotationStatus": true
+      }
+      //   "quotationFinishFlow": {
+      //     // 'noSigning' | 'signAlways' | 'signAccepted'
+      //     "customerSignature": "signAlways",
+      //     // 'noSigning' | 'signAlways' | 'signAccepted'
+      //     "engineerSignature": "signAlways",
+      //     "reportMode": "htmlPreviewAndReport", // or "uiPreviewAndReport",
+      //     /**
+      //  * If true (default), the Quotation HTML Report will be generated even if no signatures are required
+      //  *
+      //  * If false, the Quotation HTML Report will only be generated if at least one signature is required.
+      //  *
+      //  * This setting is overridden by quotationFinishFlow.customerSignature and quotationFinishFlow.engineerSignature:
+      //  *
+      //  * If at least one signature is required, the Quotation HTML Report will be always generated.
+      //  */
+      //     "generateReportWithoutSignatures": true
+      //   },
+      //   "priceFooter": {
+      //     // left and right side of the price footer, e.g. "total" | "subtotal" | "taxes" | "discounts"
+      //     // left: "subtotal", right: "total"
+      //     "left": "netPrice",
+      //     "right": "grossPrice"
+      //   },
+      //   "emailRecipientsGroupsQuotation": {
+      //     "type": "array",
+      //     "ContactListConfigurationGroup": [
+      //       {
+      //         "name": "personOne",
+      //         /** defines order, group with lowest rank first */
+      //         "rank": 2, //  20
+      //         /** translation key for display text of group, e.g. 'contactsGroup.custom' */
+      //         "caption": "Person One",
+      //         /** icon on Contact List View page, e.g. Stockicons.Persons */
+      //         "icon": "StockIcons.Persons"
+      //       }
+      //     ]
+      //   },
+      //   // ToDo: Qty decimal --> future from Article.Unit
+      //   "maxDecimals": 2
+    }
+  },
+  {
+    // spareParts configuration
+    "type": "sparePartsConfig",
+    "values": {
+      "sparePartsConfig": {
+        /**
+         * defines the state of the feature 'off' or 'standard', default is 'off'
+         */
+        "mode": "standard",
+        /*
+         * defined in number of months, and is a positive integer.
+         */
+        "monthInterval": 1,
+        /**
+         * number of times the dialog will be shown.
+         * value must be a non-zero '0' positive integer, e.g. 1, 12, 30, ...
+         * default: 1
+         */
+        "minPrice": 100,
+        /**
+         * defines if the list price should be assumed as zero if it is not available or is actually zero.
+         * e.g. configured 'minPrice' is 1, but the list price is 0, then the list price is assumed as 1, otherwise 0.
+         * Default: 'disabled'
+         */
+        "assumeZeroListPriceCorrect": "disabled"
+      }
+    }
+  },
+  {
+    // departure check notifications configuration
+    "type": "departureCheckNotificationConfig",
+    "values": {
+      "departureCheckNotification": {
+        /*
+         * 'standard': show Notification Card at JobList & blocking popup notification.
+         * 'onlyPopup': only blocking popup notification without card.
+         * 'onlyNotification': show Notification Card at JobList without popup.
+         * 'off': default -> deactivate the whole departure check feature.
+         */
+        "mode": "standard",
+        /**
+         * number of times the dialog will be shown.
+         * value must be a positive integer.
+         * default: 1
+         */
+        "numberOfTimesDialogShown": 1
+      }
+    }
+  },
+  {
+    "type": "configuration",
+    "values": {
+      // Enable search on parts/services/service-items tab
+      "itemSearch": "enable",
+      // Enable search on checklist tab
+      "checklistSearch": "extended", // options: enable | disable | extended
+      //Enables selection on followup2 when only 1 value available
+      "followUp2ShowOnlyElem": "disable",
+      /**
+     * Defines if page added to finishing wizard to decide the shipping location of the ordered parts
+     */
+      "shiptoPage": "enable",
+      /**
+     * SER__MaterialSource__c can be read-only. Sets if the shipto page saves to this field
+     */
+      "saveToOrderLineMaterialSource": "enable",
+      /**
+     *  Material movement Type can be read-only. Sets if material movement is saved in shipto page
+     */
+      "saveDeliveryAddressOrderrequestType": "enable",
+      //Enable search bar on device list
+      "deviceListSearchBar": "enable", // options : enable | disable
+      //Fields the device search checks
+      // "*" means all fields are checked
+      "deviceListBarSearchedFields": {
+        "orderItemFields": [
+          "*"
+        ],
+        "installedBaseFields": [
+          "*"
+        ],
+        "productModelFields": [
+          "*"
+        ]
+      },
+      // Enables or deactivates resource geo location tracking by motion detection.
+      //If active, every movement of the FSE over a distance larger than GeolocationDistance generates a new location information.
+      "FSELocation": "enable",
+      // Specifies the distance (in meters) the user has to move, before the location is updated. Sets 'distance' value in TrackingOptions.
+      "FSELocationDistance": 100,
+      // Specifies if and how detailed the FSE location (motion) history is stored in ResourceInfo
+      // Values: full | bucket | span | off
+      "FSELocationLog": "bucket",
+      // Specifies the accuracy of the geolocation information. The values map directly to the respective values in the platform.
+      // Values: highAccuracy | balancedPowerAccuracy | lowPower
+      "GeoLocationAccuracy": "highAccuracy",
+      // Specifies the maximum time between two consecutive motion updates, so they are interpreted as a continuos movement.
+      // Time interval in minutes
+      "MotionSequenceInterval": 5,
+      // Specifies if and how the location is recorded in the resource object and the work status log, when the appointment work status changes.
+      // Value: geo | IBL | off
+      "WorkStatusLocation": "geo",
+      //  activate work status history- Enables or deactivates recording of the work status history.
+      "WorkStatusLog": "enable",
+      // TODO: document ----  complex to configure - ask Service Solution developer for more information
+      //"priceUIOptions": DefaultPriceUiOptions,
+      "createOrderOptions": {
+        "durationSteps": 5,
+        "initialDurationStep": 15,
+        "maxLengthErrorDescription": 131072
+      },
+      "currencyFallback": "EUR",
+      "deviceHandlingOptions": {
+        "allowDeviceCreation": true, // default: true, set false to disallow creation of new devices, see T-33744
+        // 0 = DEVICE_ID,
+        // 1 = SERIAL_NUMBER,
+        "visibleDeviceIdentifier": 1
+      },
+      // real : SER__Start__c and SER__End__c
+      // communicated: SER__Communicated_time_window_start__c and SER__Communicated_time_window_end__c
+      "appointmentTimesField": "communicated", // "real" | "communicated"
+      //  activate work status dialog (T-29111: Loc Centr FS - FSE Work Status Handling)
+      "enableJobStatus": "enable",
+      // Enables or deactivates the time suggestion options in time edit page
+      "WorkStatusTimeInput": "enable",
+      // Defines the radius of the geofence in meters.
+      "GeoFenceRadius": 150,
+      // The GeoFence parameter controls whether the geofencing feature is activated. When set to enable, geofencing functionality is enabled.
+      "GeoFence": "enable",
+      // The GeoFenceTimeInput parameter allows the logs of geofencing events to be shown on the Edit page for time reporting purposes. If enable, the geofence logs will be displayed to assist in time reporting entries.
+      "GeoFenceTimeInput": "enable",
+      // GeoFenceLog is a configuration used to record the logs for geofence events (entering and leaving the geofence)
+      "GeoFenceLog": "enable",
+      // OrdersAtLocation defines wether "Orders at Location" menu item should be shown or not, values: enable, disable (= default)
+      "OrdersAtLocation": "enable",
+      // Enable or Disable the set work status page (default: disabled)
+      "SetWorkStatusPage": "enable",
+      /// Values can be set "onlyServiceRecipient", "onlyOrderContact", "serviceRecipientOrOrderContact", "orderContactOrServiceRecipient"
+      "DefineCustomerToMessage": "onlyServiceRecipient",
+      // Values can be set "No", "SMS", "Email"
+      "PresetCommunicationMedium": "no",
+      "CommunicationMediumOptions": [
+        "sms",
+        "email"
+      ],
+      // show message to customer section on set work status page
+      "ShowCustomerMessage": true,
+      // price calculation module going to be enable or disable by this configuration
+      "PriceCalculationModule": "enable",
+      // Create a configuration which allows Business Admin to select the scope of the search for adding parts to a job
+      //- ‘partsOnly’ → default, the parts view is used to search for part when adding parts
+      //- ‘partsAndProducts’ → when active, the new view will be used in the search. this way Parts and Products will be shown as search results
+      "SearchScopeForAddingParts": "partsOnly",
+      // Contacts quick search in job contacts list page, ServiceReportRecipientsView and QuotationRecipientsView ('enable' | 'disable')
+      "contactsQuickSearch": "enable",
+      // Define the character limit for activities shown in device card
+      "characterLimitForActivitiesInDeviceCard": 150,
+      // Define the max number of activities shown in device card
+      "maxNumberOfActivitiesInDeviceCard": 8,
+      /* 
+      // TODO: currrently not fully supported as StockIcons needs API value which cannot be set from outside -> refacotring needed
+      "emailRecipientsGroupsServiceReport": [
+        {
+          "name": "Location",
+          "caption": "contactListPage.categoryLocation",
+          "rank": 10,
+          "icon": StockIcons.Location,
+        },
+        {
+          "name": "Order",
+          "caption": "contactListPage.categoryOrder",
+          "rank": 20,
+          "icon": StockIcons.Briefcase,
+        },
+        {
+          "name": OrderRoleType.SERVICERECIPIENT,
+          "caption": "contactListPage.category50301",
+          "rank": 1,
+          "icon": StockIcons.Persons,
+        },
+        {
+          "name": OrderRoleType.CALLER,
+          "caption": "contactListPage.category50302",
+          "rank": 110,
+          "icon": StockIcons.Persons,
+        },
+        {
+          "name": OrderRoleType.INVOICE_RECIPIENT,
+          "caption": "contactListPage.category50303",
+          "rank": 120,
+          "icon": StockIcons.Persons,
+        },
+        {
+          "name": OrderRoleType.PAYER,
+          "caption": "contactListPage.category50304",
+          "rank": 130,
+          "icon": StockIcons.Persons,
+        },
+      ], */
+      /**
+       * Implementation of the followup selection to use in job finish, see T-33600
+       * default:     Select only followUp2 with the corresponding followUp1 value being determined automatically
+       * twoStep:     Select both followUp1 and followUp2 manually
+       */
+      "finishFlowFollowUpSelectionImplementation": "twoStep",
+      // "FULL" | "PREFIX" | "#"
+      "idFormat": "FULL",
+      "jobOptions": {
+        "disableEditInvoiceWorkTextOnPage": true, //  Default false. True disables inline editing of invoicing text on tab work/invoice description/Rechnungstext (edit field replaced by InvoiceTextCard with add button) T-37110
+        "disableEditReportRecipients": false,
+        "history": {
+          "critical": {
+            "count": 2,
+            "month": 2,
+            "showTag": true
+          }
+        },
+        /**
+         * invoice text target = appointment.order.invoicingText
+         * supporting engineer can't see finishFlow invoice step
+         * supporting engineer can't edit invoice text
+         */
+        // 'INVOICINGTEXT_RESPONSIBLE',
+        /**
+         * invoice text target = appointment.workDescription
+         * supporting engineer can't see finishFlow invoice step
+         * supporting engineer can't see invoice text
+         */
+        // 'WORKDESCRIPTION_RESPONSIBLE',
+        /**
+         * invoice text target = appointment.workDescription
+         * everyone can see finishFlow invoice step
+         * everyone can see and edit invoice text
+         */
+        // 'WORKDESCRIPTION_ALL',
+        /**
+         *  / show both cards in finish
+         * invoice text target = appointment.order.invoicingText
+         * invoice text target = appointment.workDescription
+         *
+         * supporting engineer can't see finishFlow invoice step
+         * supporting engineer can't edit invoice text
+         */
+        // 'INV_AND_WORK_RESPONSIBLE',
+        /**
+         * x__common-master / show both cards in finish
+         * invoice text target = appointment.order.invoicingText
+         * invoice text target = appointment.workDescription
+         *
+         * everyone can see finishFlow invoice step
+         * everyone can see and edit invoice text
+         */
+        // 'INV_AND_WORK_ALL',
+        "invoicingTextConfig": "INVOICINGTEXT_RESPONSIBLE",
+        "jobListRemarksMaxLength": 150,
+        "requiredTimeReportTypes": [
+          "work"
+        ],
+        "showFastTrack": false
+      },
+      /**
+       * 0 = INVOICE
+       * 1 = JOB
+       */
+      "jobReportMode": 1, // new default since 11.01.2024, so same handling (in servicereport) as in version 2023.11 (before ReportType.INVOICE)
+      "jobTemplateOptions": {
+        "confirmation": {
+          "allowPersonalTemplates": true
+        }
+      },
+      "orderItemViewOptions": {
+        "installedBaseFieldForTitle": "SER__SerialNo__c",
+        "orderItemListSort": "ordinal",
+        "orderItemSortMode": "orderItemId" // sort order items by their ID; remove to use the old sorting by building/floor/room/product model
+      },
+      "partsAndServices": {
+        "viewType": "separated" // default:'separated', use 'combined" for service_item
+      },
+      "checklist": {
+        "allowFiltering": "enable",
+        "enableEditOfChecklistsFromOtherResources": "enable"
+      },
+      "installedBaseHierarchy": {
+        /** cardStyle: 'inline' or 'list' (default: 'list') */
+        "cardStyle": "list"
+      },
+      "priceCalculationOptions": {
+        "clearingClassMultiplicator": {
+          "170001": 1
+        },
+        "contractConditionAccountRole": "50301",
+        "relevantOrderLineTypes": [
+          "52701",
+          "52702"
+        ]
+      },
+      //  activate reading geo location in job list (intermediate functionality, W-14694)
+      "readGeoLocationInJobList": true,
+      // 'uiPreviewAndReport' | 'uiPreviewAndLegacyFields' | 'uiPreviewAndReportLegacyFields' | 'htmlPreviewAndReport'
+      "serviceReportMode": "uiPreviewAndReport",
+      /**
+        * Enable Activities on Order Items
+        * Can be turned off for some sub features
+        * Time Reports are configured by configTimeSheet.activitiesAsTimeReportType 
+        */
+      "activitiesOnOrderItems": "enable",
+      "allowAddingUnplannedActivities": "enable",
+      "enableActivitySelectionPartsAndServices": "enable",
+      "showProposalDiscardButton": true
+    }
+  },
+  {
+    // Dimension / Size of attachments attached to order/assignment or device
+    "type": "attachmentConfiguration",
+    "values": {
+      // on device Page show in blocks of x tiles
+      "inlineTileCount": 2,
+      // shrink, if taken via camera
+      "maxDimension": 3000,
+      // Size in Bytes
+      "maxSize": 2097152,
+      // edit after order is completed (readOnly)
+      "permitEditOrderAttachments": false
+    }
+  },
+  {
+    // --------------------------------------------------------------------------------
+    //
+    // FeatureSet Options - data related (e.g. by picklists "5701" - Ordertype Repair)
+    //
+    "type": "fsoTypes",
+    "values": {
+      "fsoOvertimeReasons": [
+        {
+          "key": "600",
+          "sort": "10"
+        },
+        {
+          "key": "601",
+          "sort": "20"
+        },
+        {
+          "key": "602"
+        }
+      ],
+      "fsoAccountTypes": [
+        {
+          "key": "Customer",
+          "readOnly": {
+            "country": true
+          },
+          "required": {
+            "city": true,
+            "houseNo": true,
+            "localeSidKey": true,
+            "name1": true,
+            "postalCode": true,
+            "street": true
+          }
+        },
+        {
+          "key": "Partner",
+          "readOnly": {
+            "city": true,
+            "country": true,
+            "email": true,
+            "extension": true,
+            "houseNo": true,
+            "localeSidKey": true,
+            "mobilePhone": true,
+            "name1": true,
+            "name2": true,
+            "phone": true,
+            "postalCode": true,
+            "street": true
+          }
+        }
+      ],
+      "fsoAppointmentTypes": [
+        {
+          "default": true,
+          "key": "#~DEF~#",
+          "overview": {
+            //"description": true // no more in use. Description can be shown/hidden on appointment overview card by fsoOrdType.showTag.description
+            //"grouping": "daily-reminder" |  "daily-replace" | "no" // 'daily-replace': show only a notification; 'daily-reminder': show notification and appointment
+          }
+        },
+        {
+          // Stand-by
+          "key": "7407",
+          "overview": {
+            //"description": true // no more in use. Description can be shown/hidden on appointment overview card by fsoOrdType.showTag.description
+            "grouping": "daily-reminder"
+          }
+        },
+        {
+          // Doctors Visit
+          "key": "7440",
+          "overview": {
+            //"description": true // no more in use. Description can be shown/hidden on appointment overview card by fsoOrdType.showTag.description
+            "grouping": "daily-replace"
+          }
+        }
+      ],
+      "fsoAttachmentCategories": [
+        {
+          "availableToEngineer": false,
+          "colorStyle": "accent2",
+          "key": "checklist",
+          "relevanceInDropdown": 1600,
+          "relevanceInTab": 1100
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "attention",
+          "key": "damagePhoto",
+          "relevanceInDropdown": 1600,
+          "relevanceInTab": 1100
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "accent2",
+          "key": "drawing",
+          "relevanceInDropdown": 1500,
+          "relevanceInTab": 1200
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "guaranteeProof",
+          "relevanceInDropdown": 1400,
+          "relevanceInTab": 400
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "attention",
+          "key": "guideline",
+          "relevanceInDropdown": 1300,
+          "relevanceInTab": 1500
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "accent2",
+          "key": "installationDetails",
+          "relevanceInDropdown": 1200,
+          "relevanceInTab": 1300
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "installationProof",
+          "relevanceInDropdown": 1100,
+          "relevanceInTab": 500
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "neutral",
+          "key": "instructions",
+          "relevanceInDropdown": 1000,
+          "relevanceInTab": 700
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "invoice",
+          "relevanceInDropdown": 900,
+          "relevanceInTab": 200
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "accent2",
+          "key": "locationMap",
+          "relevanceInDropdown": 800,
+          "relevanceInTab": 1400
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "attention",
+          "key": "logFile",
+          "relevanceInDropdown": 700,
+          "relevanceInTab": 1000
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "neutral",
+          "key": "manual",
+          "relevanceInDropdown": 600,
+          "relevanceInTab": 800
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "meterReading",
+          "relevanceInDropdown": 500,
+          "relevanceInTab": 600
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "neutral",
+          "key": "operatingInstructions",
+          "relevanceInDropdown": 400,
+          "relevanceInTab": 900
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "neutral",
+          "key": "other",
+          "relevanceInDropdown": 0,
+          "relevanceInTab": 0
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "report",
+          "relevanceInDropdown": 300,
+          "relevanceInTab": 300
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "attention",
+          "key": "safetyInstructions",
+          "relevanceInDropdown": 200,
+          "relevanceInTab": 1600
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "attention",
+          "key": "checklist",
+          "relevanceInDropdown": 200,
+          "relevanceInTab": 1600
+        }
+      ],
+      // Definiert die Anzeige sowie Darstellungsformat des Zeitfensters im Termin (Ganzer Tag, Erster Kunde, ...)
+      // inkl. Angabe von kalkuliertem Beginn und Ende
+      "fsoCustomerTimeWindow": [
+        {
+          "default": true,
+          // Mögliche Parameter im Bereich fields:
+          // > timewindowtype         -> Zeitfenster anzeigen SER__SCAppointment__c.SER__CustomerTimewindow__c (z.B. Ganzer Tag)
+          // > start                  -> Zeigt Arbeitsbeginn aus Termin an
+          // SER__SCAppointment__c.SER__Start__c (z.B. 08:00)
+          // > start-end              -> Zeigt Arbeitsbeginn und Arbeitsende aus Termin an
+          // SER__SCAppointment__c.SER__Start__c - SER__SCAppointment__c.SER__End__c (z.B. 08:00 – 09:00)
+          // > timewindow-start-end   -> Zeigt das Zeitfenster mit Arbeitsbeginn und Arbeitsende auf Basis des gewählten Zeitfensters an
+          // SER__SCAppointment__c.SER__CustomerTimewindow__c SER__SCAppointment__c.SER__Start__c - SER__SCAppointment__c.SER__End__c
+          // (z.B. [Ganzer Tag] 08:00 – 17:00)
+          "fields": [
+            "timewindowtype",
+            "timewindow-start-end"
+          ],
+          "key": "#~DEF~#"
+        }
+      ],
+      "fsoDeviceFinishes": [
+        /** variant = light
+         *  => hide always device Status details card
+         *  => hide always device follow up step (Device Status Step)
+         *  => Device Status Card only shown when device has status completed with label "Completed" and colorStyle 'positive', click on card reopens the device (SER__CompletionStatus__c = '57101') and hide status card
+         *  => do not set SER__WorkResult__c, SER__Description__c when completing device, SER__CompletionStatus__c for completed always '57103'
+         *
+         * variant = advanced
+         *  => ...
+         **/
+        /*{
+          "key": "fsoDeviceFinish",
+          "variant": "light"
+        }*/
+      ],
+      // required to cover dependency
+      // if any of both fso are use, full config in FSO required
+      "fsoFollowUp1Types": [
+        {
+          "followUp2Keys": [
+            "2901"
+          ],
+          // completed
+          "key": "2801"
+        },
+        {
+          "followUp2Keys": [
+            "2902",
+            "2903",
+            "2904",
+            "2950"
+          ],
+          // re-schedule
+          "key": "2802"
+        },
+        {
+          "followUp2Keys": [
+            "2951",
+            "2952"
+          ],
+          // wait for customer response
+          "key": "2804"
+        },
+        {
+          "followUp2Keys": [
+            "2953",
+            "2954"
+          ],
+          // return unprocessed
+          "key": "2845"
+        }
+      ],
+      // Auswahllistenwerte "Folgeaktivität" bei Auftragsabschluss mit Sortier-Möglichkeit
+      // Wenn dispatchAppointment = true: Schaltfläche zur Folgeterminvereinbarung erscheint im nächsten Schritt
+      "fsoFollowUp2Types": [
+        {
+          "actions": {
+            "dispatchAppointment": true
+          },
+          "default": true,
+          "key": "#~DEF~#"
+        },
+        {
+          "actions": {
+            "dispatchAppointment": true
+          },
+          //Alles erledigt, keine Folgeaktivität
+          "key": "2901",
+          "show": true,
+          "sort": 100,
+          //Validierungen
+          "validate": {
+            //Bei Auswahl dieser Folgeaktion sind die folgenden Zeit-Arten Pflicht
+            "timereport": {
+              "types": [
+                //Arbeitszeit
+                "7503",
+                //Fahrtzeit
+                "7505"
+              ]
+            }
+          }
+        },
+        {
+          "key": "2902",
+          "show": true
+        },
+        {
+          "key": "2903",
+          "show": true
+        },
+        {
+          "key": "2904",
+          "show": true
+        }
+      ],
+      // Invoicing Type on Order / OrderLine
+      // add | hide | sort
+      // referenced in fsoOrderType.invoiceTypeKeys
+      "fsoInvoicingTypes": [
+        {
+          "default": true,
+          "key": "#~DEF~#",
+          // once "required" is defined, only FSO define behaviour
+          "required": {
+            // default: undefined -> not required, "signAlways", hide with "noSigning"
+            //"customerSignature": "signAlways",
+            // default: "signAlways", hide with "noSigning"
+            "engineerSignature": "signAlways"
+          }
+        },
+        {
+          "key": "170001",
+          "show": true,
+          "sort": 50
+        },
+        {
+          "key": "170002",
+          "show": true,
+          "sort": 100
+        },
+        {
+          "key": "170003",
+          "show": true,
+          "sort": 150
+        },
+        {
+          "key": "170004",
+          "show": true,
+          "sort": 200
+        },
+        {
+          "key": "170005",
+          "show": true,
+          "sort": 250
+        },
+        {
+          "key": "170006",
+          "show": true,
+          "sort": 300
+        }
+      ],
+      "fsoJobFilter": [
+        {
+          "key": "notCompleted",
+          "sortReverse": true
+        }
+      ],
+      "fsoJobFinishes": [
+        /*{
+          "key": "fsoJobFinish",
+          "singleDevice": {
+            "uncompletedDevice": "issue"
+          },
+          "multipleDevice": {
+            "uncompletedDevice": "hint"
+          }
+        }*/
+      ],
+      "fsoOrderContact": [
+        {
+          "key": "#~DEF~#",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": ""
+        },
+        {
+          "key": "editContactPage.firstnameID",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": ""
+        },
+        {
+          "key": "editContactTabPage.LastnameOrCompanyID",
+          "show": true,
+          "mandatory": true,
+          "DefaultValue": ""
+        },
+        {
+          "key": "editContactTabPage.phoneID",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": "Phone Test default"
+        },
+        {
+          "key": "editContactTabPage.emailID",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": ""
+        },
+        {
+          "key": "editContactTabPage.DepartmentID",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": ""
+        }
+      ],
+      "fsoJobMenus": [
+        {
+          // JobList | QuickAction | Create order
+          "key": "jobListCreateOrder",
+          "show": true
+        },
+        {
+          // Right | Debug Dump | shown, if Debug = true
+          "key": "DebugDumpAppointmentMenuItem",
+          "show": true
+        },
+        {
+          // Left | Apply Template
+          "key": "ApplyTemplatesMenuItem",
+          "show": true
+        },
+        {
+          // RejectJobMenuItem
+          "key": "RejectJobMenuItem",
+          "show": true
+        },
+        {
+          "key": "CancelJobMenuItem",
+          "show": true
+        },
+        {
+          // all Tasks...
+          "key": "TasksSubMenuMenuItem",
+          "show": true
+        },
+        {
+          // Task | Create Order...
+          "key": "CreateOrderMenuItem",
+          "show": true
+        },
+        {
+          // Task | Change Product...
+          "key": "ChangeProductMenuItem",
+          "show": true
+        },
+        {
+          // Tasks | Import Quotation
+          "key": "ImportQuotationItemsMenuItem",
+          "show": true
+        },
+        {
+          // Tasks | List Contacts
+          "key": "ListContactsMenuItem",
+          "show": true
+        },
+        {
+          // Tasks | Device list @ location
+          "key": "DevicesAtLocationMenuItem",
+          "show": true
+        },
+        {
+          // Right | Report Preview...
+          "key": "ServiceReportMenuItem",
+          "show": true
+        },
+        {
+          // Right | Quotation...
+          "key": "QuotationJobMenuItem",
+          "show": true
+        },
+        {
+          // OrderItem | complete
+          "key": "orderItem.CompleteOrderItemMenuItem",
+          "show": true
+        },
+        {
+          // OrderItem | Apply Template
+          "key": "orderItem.ApplyTemplatesMenuItem",
+          "show": true
+        },
+        {
+          // OrderItem | Tasks
+          "key": "orderItem.TasksSubMenuMenuItem",
+          "show": true
+        }
+      ],
+      /* //example for fsoQuotationValidityOptions
+      "fsoQuotationValidityOptions": [
+        {
+          "default": true,
+          "key": "#~DEF~#",
+          "unit": "days"
+        },
+        {
+          "value": 30,
+          "key": "30 days"
+        },
+        {
+          "value": 60,
+          "key": "60 days"
+        }
+      ], */
+      // Keys of FSEJobStatus need to be config picklist values on salesforce "Appointment.WorkStatus", "ResourceInformation.WorkStatus" accordingly
+      "fsoJobStatuses": [
+        {
+          "color": "neutral",
+          "icon": "Stop",
+          "isDefaultValue": true,
+          "key": "Open",
+          "locationRelated": false,
+          "nextValue": [
+            "Drive"
+          ]
+        },
+        {
+          "color": "attention",
+          "icon": "Vehicle",
+          "key": "Drive",
+          "locationRelated": false,
+          "nextValue": [
+            "In Progress",
+            "Delay"
+          ]
+        },
+        {
+          "color": "danger",
+          "icon": "ClockForwards",
+          "key": "Delay",
+          "locationRelated": false,
+          "nextValue": [
+            "In Progress"
+          ]
+        },
+        {
+          "color": "accent2",
+          "icon": "Play",
+          "key": "In Progress",
+          "locationRelated": true,
+          "nextValue": [
+            "Completed",
+            "On Hold"
+          ]
+        },
+        {
+          "color": "brand",
+          "icon": "Pause",
+          "key": "On Hold",
+          "locationRelated": true,
+          "nextValue": [
+            "In Progress"
+          ]
+        },
+        {
+          "color": "positive",
+          "icon": "Check",
+          "isDefaultForJobFinish": true,
+          "key": "Completed",
+          "locationRelated": true,
+          "nextValue": []
+        }
+      ],
+      "fsoJobTabs": [
+        {
+          // Attachments for Job/Visit
+          "key": "attachmentTab"
+        },
+        {
+          "cards": [
+            // cards: priorityCard, noteCard, teamCard, customerCard, orderRolesCard, orderCard, invoiceTextCard,
+            // followupDescriptionCard, partsOutlineCard, servicesOutlineCard, quotationsOutlineCard, jobQuotationCard
+            // layout syntax "layout": [2,[1,2],[1,2]]
+            {
+              "key": "engineerResponsibleCard",
+              "sort": 50
+            },
+            {
+              "key": "priorityCard",
+              // sample could be used for ALL cartds
+              "layout": [
+                2,
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "sort": 100
+            },
+            {
+              "key": "noteCard",
+              "sort": 150
+            },
+            {
+              "key": "teamCard",
+              "sort": 200
+            },
+            {
+              "key": "customerCard",
+              "sort": 250
+            },
+            {
+              "key": "orderRolesCard",
+              "sort": 275
+            },
+            {
+              "key": "orderCard",
+              "sort": 300
+            },
+            {
+              "key": "invoiceTextCard",
+              "sort": 350
+            },
+            {
+              "key": "internalNoteCard",
+              "sort": 380
+            },
+            {
+              "key": "partsOutlineCard",
+              "sort": 400
+            },
+            {
+              "key": "servicesOutlineCard",
+              "sort": 450
+            },
+            {
+              "key": "quotationsOutlineCard",
+              "sort": 480
+            }
+          ],
+          // hide on orderItem / device level
+          "itemLevel": false,
+          "key": "orderOverviewTab",
+          "show": true,
+          "sort": 10
+        },
+        {
+          // faststrack (with postfix)
+          "key": "fastTrackTabExtension",
+          "sort": 1100
+        },
+        {
+          // parts (with postfix)
+          "key": "partsTabExtension",
+          "sort": 300
+        },
+        {
+          // times (with postfix)
+          "key": "timesTabExtension",
+          "sort": 200
+        },
+        {
+          // RepairCodes Maßnahmen, config: "fsoRepairCodes"
+          "key": "orderRepairCodeTab",
+          "show": true,
+          "sort": 999
+        },
+        {
+          "itemLevel": true, // multiple device order with selected device: show on item level
+          // Workdescription. For new tab/page, like this, we use optIn, see T-37110. So it's per default not visible and we have to show it explicitly
+          "key": "workDescriptionEditTab",
+          "orderLevel": true, // multiple device order but no device selected: show on order level
+          "show": true, // config for single device order
+          "sort": 1250
+        },
+        {
+          // Services (with postfix)
+          "key": "servicesTabExtension"
+        },
+        {
+          // Positions - Parts and Services - Service Items (precondition: partsAndServices.viewType = 'combined', default: 'separated')
+          "key": "serviceItemsTab"
+        },
+        {
+          // List of Roles
+          "key": "contactEditTab",
+          "sort": 1250
+        },
+        {
+          // List of days for multi-day appointments
+          "key": "jobDaysTab",
+          "sort": 1075
+        },
+        {
+          "cards": [
+            {
+              "key": "engineerResponsibleCard",
+              "sort": 100
+            },
+            {
+              "key": "noteCard",
+              "sort": 200
+            },
+            {
+              "key": "teamCard",
+              "sort": 300
+            },
+            {
+              "key": "customerCard",
+              "sort": 400
+            },
+            {
+              "key": "additionalCustomerInfoCard",
+              "sort": 450
+            },
+            {
+              "key": "orderRolesCard",
+              "sort": 450
+            },
+            {
+              "key": "attachmentButton",
+              "sort": 500
+            },
+            {
+              "key": "appointmentCard",
+              "sort": 600
+            },
+            {
+              "key": "orderCard",
+              "sort": 700
+            },
+            {
+              "key": "ContractReference",
+              "sort": 750
+            },
+            {
+              "key": "priorityCard",
+              "sort": 800
+            },
+            {
+              "key": "priceUiElements",
+              "sort": 900
+            },
+            {
+              // addOn | merged by JobOutlineTabExtension from QuotationModule
+              "key": "jobQuotationCard",
+              "sort": 11
+            },
+            {
+              "key": "invoiceTextCard",
+              "sort": 1100
+            },
+            {
+              "key": "followupDescriptionCard",
+              "sort": 1150
+            },
+            {
+              "key": "assignmentCard",
+              "sort": 1200
+            },
+            {
+              "key": "slaCard",
+              "sort": 1300
+            },
+            {
+              // list of orderitems (first 3 in compact mode)
+              "key": "orderItemsCard",
+              "sort": 1400
+            }
+          ],
+          // job Details
+          "key": "jobOutlineTab"
+        },
+        {
+          "cards": [
+            {
+              "key": "orderItemStatusCard",
+              "sort": 100
+            },
+            {
+              "key": "deviceStatusDetailCard",
+              "sort": 150
+            },
+            {
+              "key": "noteCard",
+              "sort": 200
+            },
+            {
+              "key": "serialNumberInlineEditElement",
+              "sort": 300
+            },
+            {
+              "key": "newtonDocumentsButton",
+              "sort": 400
+            },
+            {
+              "key": "errorCard",
+              "sort": 500
+            },
+            {
+              "key": "productDetailsCard",
+              "sort": 600
+            },
+            {
+              "key": "deviceIdentificationCard",
+              "sort": 700
+            },
+            {
+              "key": "warrantyCard",
+              "sort": 800
+            },
+            {
+              "key": "deviceDateCard",
+              "sort": 900
+            },
+            {
+              "key": "maintenanceCard",
+              "sort": 1000
+            },
+            {
+              "key": "historyCard",
+              "sort": 1100
+            },
+            {
+              "key": "deviceAttachmentCard",
+              "sort": 1200
+            }
+          ],
+          // device tab | orderItem
+          "key": "deviceOutlineTab"
+        },
+        {
+          // History Tab
+          "key": "orderItemHistoryTab",
+          "show": true,
+          "sort": 550
+        },
+        {
+          // Checklists / key requires postfix "Extension"
+          "itemLevel": true,
+          "key": "checklistTabExtension",
+          "orderLevel": true,
+          "sort": 700
+        },
+        {
+          "key": "importantChecklistTabTabExtension",
+          "show": true
+        },
+        {
+          "cards": [
+            {
+              "key": "serialNumberInlineEditElement",
+              "show": true
+            },
+            {
+              "key": "productCard",
+              "show": true
+            },
+            {
+              "key": "deviceIdentificationCard",
+              "show": true
+            },
+            {
+              "key": "warrantyCard",
+              "show": true
+            },
+            {
+              "key": "customerCard",
+              "show": true
+            },
+            {
+              "key": "maintenanceCard",
+              "show": true
+            },
+            {
+              "key": "historyCard",
+              "show": true
+            },
+            {
+              "key": "contactCard",
+              "show": true
+            }
+          ],
+          "key": "InstalledBaseOutlinePage",
+          "show": true
+        },
+        { // installedBaseHierarchyTab
+          "key": "installedBaseHierarchyTab",
+          "show": true,
+          "orderLevel": true,
+          "itemLevel": false
+        }
+      ],
+      //Steuerung des "Verhaltens" bei Eingabe / Änderung von Mengen (Ersatzteile / Services)
+      "fsoMaterialUnitQtyRules": [
+        {
+          //Gültig für Mengeneinheit (ISO-Einheit oder Basis-Einheit)
+          "key": "KGM",
+          //Maximal erlaubte Nachkommastellen
+          "maxNumberOfDecimalDigits": 2,
+          //"Sprung-Intervall" bei Klick auf die + oder - Schaltfläche, um Menge zu erhöhen oder zu reduzieren
+          // Zusätzlich definiert dieser Wert die "Startmenge" bei Hinzufügen eines Ersatzteils / eines Services
+          // Manuelle Eingabe per Tastatur ist weiterhin davon abweichend möglich
+          "stepValue": 0.05
+        },
+        {
+          "key": "STD",
+          "maxNumberOfDecimalDigits": 2,
+          "stepValue": 0.25
+        },
+        {
+          "key": "ST",
+          "maxNumberOfDecimalDigits": 2,
+          "stepValue": 1
+        },
+        {
+          "key": "G",
+          "maxNumberOfDecimalDigits": 0,
+          "stepValue": 100
+        }
+      ],
+      //Konfiguration der Auftragsrollen: Reihenfolge der Felder sowie Kundendaten-Änderung vs. ReadOnly abhängig von der Rolle
+      "fsoOrderRoleTypes": [
+        {
+          "default": "true",
+          "invisible": {
+            "extension": true
+          },
+          "key": "#~DEF~#",
+          //Reihenfolge der dargestellten Felder
+          "sorting": {
+            "city": 900,
+            "country": 1000,
+            "email": 300,
+            "houseNo": 700,
+            "localeSidKey": 1100,
+            "mobilePhone": 400,
+            "name1": 100,
+            "name2": 200,
+            "name3": 210,
+            "name4": 220,
+            "phone": 500,
+            "postalCode": 800,
+            "street": 600
+          }
+        },
+        {
+          "invisible": {
+            "city": true,
+            "country": true,
+            "extension": true,
+            "houseNo": true,
+            "postalCode": true,
+            "street": true
+          },
+          "key": "Contact",
+          "required": {
+            "city": false,
+            "country": false,
+            "extension": false,
+            "houseNo": false,
+            "localeSidKey": true,
+            "name1": true,
+            "postalCode": false,
+            "street": false
+          }
+        },
+        {
+          //Leistungsempfänger
+          "key": "50301",
+          //wenn true = nur anzeigen, wenn false = darf geändert werden
+          "readOnly": {
+            "city": false,
+            "country": false,
+            "email": false,
+            "extension": false,
+            "houseNo": false,
+            "localeSidKey": false,
+            "mobilePhone": false,
+            "name1": false,
+            "name2": false,
+            "phone": false,
+            "postalCode": false,
+            "street": false
+          }
+        },
+        {
+          //Auftraggeber
+          "key": "50302",
+          //wenn true = nur anzeigen, wenn false = darf geändert werden
+          "readOnly": {
+            "city": true,
+            "country": true,
+            "email": true,
+            "extension": true,
+            "houseNo": true,
+            "localeSidKey": true,
+            "mobilePhone": true,
+            "name1": true,
+            "name2": true,
+            "phone": true,
+            "postalCode": true,
+            "street": true
+          }
+        }
+      ],
+      //Konfiguration Auftragsarten (allgemein)
+      "fsoOrderTypes": [
+        {
+          "default": true,
+          "key": "#~DEF~#", // check if this key is even working
+          "required": {
+            "repairCode": false,
+            /**
+            Array of field ids which are required when creating/updating an repair code
+            possible values:
+                editErrorLocation1
+                editErrorLocation2
+                editErrorLocationMultiDropDown
+                editSymptomCode1
+                editErrorType1
+                editErrorType2
+                editErrorTypeMultiDropDown
+                editActivity1
+                editActivity2
+                editErrorActivityMultiDropDown
+                editRepairCodeErrorCausingPart
+                editRepairCodeEditErrorDesc
+            If a field is not visible, it will not be marked as required - visible fields are controlled by fsoRepairCodes 
+            */
+            "repairCodeFields": [
+              ""
+            ],
+            "order": {
+              "repairCode": "hint" // show issue in issue view when repair code for order is missing
+            },
+            "orderItem": {
+              "repairCode": "hint" // show issue in issue view when repair code for all order items is missing
+            }
+          }
+        },
+        {
+          //Mögliche Aktivitäten bei Auftragskopie zu dieser Auftragsart
+          "activityKeys": [
+            "Error_Analysis_Necassary",
+            "Compressor"
+          ],
+          //Für diese Auftragsart zugelassene Verrechnungsarten
+          "invoiceTypeKeys": [
+            //Kostenpflichtig
+            "170001",
+            //Garantie 2 Jahre
+            "170002",
+            //Gewährleistung auf Reparatur
+            "170003",
+            //Kulanz Vertrieb
+            "170004",
+            //Kulanz Kundendienst
+            "170005"
+          ],
+          //Reparatur
+          "key": "5701",
+          "required": {
+            //Prüfung ob Techniker alle Gerätepositionen mit Status "abgeschlossen" bestätigt hat. Default: true
+            "orderItemCompletionStatus": true,
+            //Eingabe Reparaturcode erforderlich
+            "repairCode": true,
+            "order": {
+              "repairCode": "hint" // show issue in issue view when repair code for order is missing
+            },
+            "orderItem": {
+              "repairCode": "hint" // show issue in issue view when repair code for all order items is missing
+            }
+          },
+          "show": {
+            //Für Auftragskopie verfügbar - T-32627
+            "offlineAvailable": true
+          }
+        },
+        {
+          "activityKeys": [
+            "Standard"
+          ],
+          "invoiceTypeKeys": [
+            //Kostenpflichtig
+            "170001",
+            //Kulanz Vertrieb
+            "170004",
+            //Kulanz Kundendienst
+            "170005"
+          ],
+          // Inbetriebnahme / Installation
+          "key": "5705",
+          "required": {
+            "repairCode": false,
+            "order": {
+              "repairCode": null // show issue in issue view when repair code for order is missing
+            },
+            "orderItem": {
+              "repairCode": null // show issue in issue view when repair code for all order items is missing
+            }
+          },
+          "show": {
+            "offlineAvailable": false
+          }
+          // ,
+          // "hideTabs": [ // add the implementationId of tab here to hide it for the comissioning Order Type
+          //   "orderRepairCodeTabExtension"
+          // ]
+        },
+        {
+          "activityKeys": [
+            "Standard"
+          ],
+          "invoiceTypeKeys": [
+            //Kostenpflichtig
+            "170001"
+          ],
+          //Ersatzteilverkauf
+          "key": "5706",
+          "required": {
+            "repairCode": false
+          },
+          "show": {
+            "offlineAvailable": true
+          }
+        },
+        {
+          "activityKeys": [
+            "Standard"
+          ],
+          "invoiceTypeKeys": [
+            //Kostenpflichtig
+            "170001",
+            //Kulanz Vertrieb
+            "170004",
+            //Kulanz Kundendienst
+            "170005"
+          ],
+          //Wartung
+          "key": "5707",
+          "required": {
+            "repairCode": false
+          },
+          "show": {
+            "offlineAvailable": true
+          }
+        }
+      ],
+      // Definition, bei welchen Angebots-Status die Unterschrift des Kunden und / oder des Technikers erforderlich sind
+      "fsoQuotationStatus": [
+        {
+          //Angebot angenommen
+          "key": "Accepted",
+          "required": {
+            //Unterschrift des Kunden: true = Unterschrift erforderlich. Quotation.Config.quotationFinishFlow.customerSignature used as default
+            "customerSignature": true,
+            //Unterschrift des Technikers: true = Unterschrift erforderlich. Quotation.Config.quotationFinishFlow.customerSignature used as default
+            "engineerSignature": true
+          },
+          //Auswahllistenwert anzeigen
+          "show": true
+        },
+        {
+          // Zur Angebotserstellung in den Innendienst schicken
+          "key": "Postponed",
+          "required": {
+            "customerSignature": false,
+            "engineerSignature": false
+          },
+          "show": true
+        },
+        {
+          // Angebot abgelehnt
+          "key": "Rejected",
+          "required": {
+            "customerSignature": false,
+            "engineerSignature": false
+          },
+          "show": true
+        }
+      ],
+      "fsoDeviceErrorDescription": [
+        /*
+          FSO Device Error Description, used in Device Tab and Error Description element. 
+          the dropdowns at the moment only support dependencyMapErrorSymptom1To2 and dependencyMapErrorSymptom2To3.
+          other single options need to be implemented.
+        */
+        {
+          "default": true,
+          "dependencyMapErrorSymptom1To2": {
+            // Cracks -> short, long, many
+            "01": [
+              "011",
+              "012",
+              "013"
+            ],
+            "500": [
+              "014",
+              "500"
+            ],
+            // Noises -> Zing, metallic, buzzing
+            "02": [
+              "021",
+              "022",
+              "023"
+            ],
+            // Smell -> Burned, Putrid
+            "03": [
+              "031",
+              "032"
+            ],
+            // Smoke -> String, little
+            "04": [
+              "041",
+              "042"
+            ]
+          },
+          "dependencyMapErrorSymptom2To3": {
+            // Short -> slight, deep, leak
+            "011": [
+              "0011",
+              "0012",
+              "0013"
+            ],
+            // Long -> slight, deep, leak
+            "012": [
+              "0011",
+              "0012",
+              "0013"
+            ],
+            // Many -> slight, deep, leak
+            "013": [
+              "0011",
+              "0012",
+              "0013"
+            ],
+            // custom values for testing PA - translation is "Few"
+            "014": [
+              "0011",
+              "0012",
+              "0013"
+            ],
+            // custom values for testing PA - translation is "Test PA"
+            "500": [
+              "500"
+            ],
+            // zing -> loud, quietly
+            "021": [
+              "0021",
+              "0022"
+            ],
+            // metallic -> loud, quietly
+            "022": [
+              "0021",
+              "0022"
+            ],
+            // buzzing -> loud, quietly
+            "023": [
+              "0021",
+              "0022"
+            ],
+            // burned -> strong, little
+            "031": [
+              "0031",
+              "0032"
+            ],
+            // putrid -> strong, little
+            "032": [
+              "0031",
+              "0032"
+            ],
+            // strong -> dark, bright
+            "041": [
+              "0041",
+              "0042"
+            ],
+            // little -> dark, bright
+            "042": [
+              "0041",
+              "0042"
+            ]
+          },
+          "key": "#~DEF~#"
+        }
+      ],
+      "fsoRepairCodes": [
+        // Maßnahmen / Repair codes, page: orderRepairCodeTab
+        /* 
+      // prefixes for domain values of a repair code field:
+        'DOM_RC_ERRLOCATION1_', 'DOM_RC_ERRLOCATION2_',
+        'DOM_RC_ERRTYPE1_', 'DOM_RC_ERRTYPE2_', 
+        'DOM_RC_ERRACTIVITY1_', 'DOM_RC_ERRACTIVITY2_',
+        'DOM_RC_ERR_SYMPTOM_' ('DOM_RC_ERR_SYMPTOM1_', 'DOM_RC_ERR_SYMPTOM2_' not yet supported) 
+      // lists with values/codes for a field having no dependency: 
+        'errorLocation1', 'errorLocation2',
+        'errorType1', 'errorType2', 
+        'errorActivity1', 'errorActivity2',
+        'errorSymptomLst' ('errorSymptom1', 'errorSymptom2' not yet supported)
+      // lists with tuples for code/field 1 with dependency to field 2:
+        'dependencyMapErrorLocation1To2', 'dependencyMapErrorType1To2', 'dependencyMapErrorActivity1To2'  ('dependencyMapErrorSymptom1to2' not yet supported)
+    */
+        {
+          "default": true,
+          "dependencyMapErrorActivity1To2": {
+            "01": [
+              "001",
+              "002"
+            ],
+            "02": [
+              "003",
+              "004",
+              "005",
+              "006"
+            ],
+            "03": [
+              "004",
+              "005",
+              "006"
+            ],
+            "04": [
+              "003",
+              "005"
+            ],
+            "05": [
+              "003",
+              "005",
+              "007"
+            ],
+            "06": [
+              "004"
+            ],
+            "07": [
+              "003",
+              "005",
+              "007"
+            ],
+            "08": [
+              "004"
+            ],
+            "09": [
+              "004",
+              "005"
+            ],
+            "10": [
+              "003",
+              "004",
+              "005",
+              "007"
+            ]
+          },
+          "dependencyMapErrorLocation1To2": {
+            "01": [
+              "001"
+            ],
+            "02": [
+              "002",
+              "003"
+            ],
+            "03": [
+              "001",
+              "003"
+            ],
+            "04": [
+              "001",
+              "002",
+              "003"
+            ],
+            "05": [
+              "001",
+              "002",
+              "003"
+            ],
+            "06": [
+              "001",
+              "002",
+              "003"
+            ],
+            "07": [
+              "001",
+              "002",
+              "003"
+            ],
+            "08": [
+              "001",
+              "002",
+              "003"
+            ],
+            "09": [
+              "001",
+              "002",
+              "003"
+            ],
+            "10": [
+              "001",
+              "002",
+              "003"
+            ]
+          },
+          "dependencyMapErrorType1To2": {
+            "01": [
+              "001",
+              "002",
+              "003"
+            ],
+            "02": [
+              "001",
+              "002",
+              "004"
+            ],
+            "03": [
+              "001",
+              "002",
+              "005"
+            ],
+            "04": [
+              "001",
+              "002",
+              "006"
+            ],
+            "05": [
+              "001",
+              "002",
+              "007"
+            ],
+            "06": [
+              "001",
+              "002",
+              "008"
+            ],
+            "07": [
+              "001",
+              "002",
+              "009"
+            ],
+            "08": [
+              "001",
+              "002",
+              "010"
+            ],
+            "09": [
+              "001",
+              "002",
+              "011"
+            ],
+            "10": [
+              "001",
+              "002",
+              "012"
+            ]
+          },
+          // 3. Symptom Prefix: "DOM_RC_ERR_SYMPTOM_"
+          "errorSymptomLst": [
+            "01",
+            "02",
+            "03",
+            "04"
+          ],
+          "key": "#~DEF~#"
+        }
+      ],
+      // Filter on material page in stock module - selectable actions
+      // Additional keys (coke): "available", "replenishment", "replenishmentPending"
+      "fsoStockFilter": [
+        {
+          // stockitem
+          "key": "stock",
+          "show": true,
+          "sort": 10
+        },
+        {
+          // movements: deliveries
+          "key": "deliveries",
+          "show": true,
+          "sort": 20
+        },
+        {
+          // movements: return
+          "key": "return",
+          "show": true,
+          "sort": 30
+        },
+        {
+          // movements: transfer
+          "key": "transfer",
+          "show": true,
+          "sort": 40
+        },
+        {
+          // movements: order
+          "key": "order",
+          "show": true,
+          "sort": 50
+        },
+        {
+          // movements: allMovements
+          "key": "allMovements",
+          "show": true,
+          "sort": 60
+        },
+        {
+          // all stockitems with qty > 0
+          "key": "available",
+          "show": true,
+          "sort": 70
+        }
+      ],
+      "fsoTabCards": [
+        {
+          "key": "quotationsTab.QuickAction",
+          "elements": [
+            { // Add Quotation Item add from material master and the values can be show true to enable the button or false to disable it
+              "key": "addQuotationFromMaterialMaster",
+              "show": true
+            },
+            { // Add Quotation Item add from stock and the values can be show true to enable the button or false to disable it
+              "key": "addQuotationFromStock",
+              "show": true
+            }
+          ]
+        },
+        {
+          "key": "partsTab.QuickAction",
+          "elements": [
+            { // parts add - standard
+              "key": "addPartsFromMaterialMaster",
+              "show": true
+            },
+            { // parts add from stock (Qty > 0)
+              "key": "addPartsFromStock",
+              "show": true
+            }
+          ]
+        },
+        {
+          "key": "serviceItemsTab.QuickAction",
+          "elements": [
+            { //Configuration: only_services, all
+              "key": "addServiceItemFromMaterialMaster",
+              "show": true,
+              "label": "all"
+            },
+            { // parts add from stock (Qty > 0)
+              "key": "addPartFromStock",
+              "show": true
+            }
+          ]
+        },
+        {
+          "key": "resourceEquipmentEditPage",
+          "show": true,
+          "elements": [
+            {
+              "key": "#~DEF~#",
+              "default": true,
+              "show": true
+            },
+            {
+              "key": "2605"
+            },
+            {
+              "key": "2606"
+            }
+          ]
+        },
+        {
+          "key": "orderItemDetailPage",
+          "elements": [
+            {
+              "key": "orderItemDetailInstalledBaseSerialNumberEdit",
+              "readOnly": true
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "key": "matStatus",
+              "show": true
+            },
+            {
+              "key": "orderName",
+              "show": false
+            }
+          ],
+          //Control field visibility on the material page delivery view
+          "key": "deliveryMaterialListViewCard"
+        },
+        {
+          "elements": [
+            {
+              "key": "email",
+              "show": true
+            },
+            {
+              "key": "phone",
+              "show": true
+            },
+            {
+              "key": "footer",
+              "show": true
+            }
+          ],
+          //Control field visibility on the TeamMemberCard.tsx
+          "key": "teamMemberCard"
+        },
+        {
+          "elements": [
+            {
+              "key": "editSymptomCode1",
+              "show": true
+            },
+            {
+              "key": "editRepairCodeErrorCausingPart",
+              "show": true
+            },
+            {
+              "key": "editRepairCodeEditErrorDesc",
+              "show": true
+            },
+            {
+              "key": "errorArticleCard",
+              "show": true
+            }
+          ],
+          "key": "OrderRepairCodeEditPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "propsErrorLocation1",
+              "show": false
+            },
+            {
+              "key": "propsErrorLocation2",
+              "show": false
+            },
+            {
+              "key": "propsErrorSymptom1",
+              "show": false
+            },
+            {
+              "key": "propsErrorArticle",
+              "show": false
+            }
+          ],
+          "key": "OrderRepairCodeDetailsPage"
+        },
+        {
+          "elements": [
+            {
+              // Möglichkeit, für den kompletten Auftrag einen Rabatt mitzugeben
+              "key": "editJobDiscount",
+              "show": false
+            },
+            {
+              "key": "resetOrderLine",
+              "show": false
+            },
+            {
+              // In Auftrags-Optionen ("Zahnrad") Nettopreis editierbar (true) oder ReadOnly (false)
+              "key": "editNetPrice",
+              "show": false
+            },
+            {
+              // In Auftrags-Optionen ("Zahnrad") Bruttopreis editierbar (true) oder ReadOnly (false)
+              "key": "editGrossPrice",
+              "show": false
+            },
+            {
+              // Anzeigen (true) oder Ausblenden (false) der Schaltfläche zum
+              //Anzeigen oder Ausblenden von Preisen in der Auftragsbearbeitung (T-31101 / T-31554)
+              "key": "toggleShowHidePrices",
+              "show": false
+            }
+          ],
+          // Steuert die Seite, die beispielsweise aus den Ersatzteilen heraus über die Zahnrad-Schaltfläche aufgerufen werden kann
+          "key": "jobOptionsPage"
+        },
+        // Price.* - artificial key for different Pricing UI elements
+        {
+          "elements": [
+            {
+              "key": "tax",
+              // remove from overview
+              "show": true
+            }
+          ],
+          "key": "Price.totalPriceUI",
+          "show": true
+        },
+        {
+          "elements": [
+            {
+              "key": "tax",
+              "show": true
+            },
+            {
+              "key": "listPrice",
+              "show": true
+            },
+            {
+              "key": "grossPrice",
+              "show": true
+            },
+            {
+              "key": "unitNetPrice",
+              "show": true
+            },
+            {
+              "key": "positionPrice",
+              "show": true
+            },
+            {
+              "key": "relativeDiscount",
+              "show": true
+            },
+            {
+              "key": "absoluteDiscountToRelativeDiscount",
+              "show": true
+            }
+          ],
+          "key": "Price.orderLinePriceUI"
+        },
+        {
+          "elements": [
+            {
+              "key": "tax",
+              "show": true
+            },
+            {
+              "key": "grossPrice",
+              "show": true
+            },
+            {
+              "key": "netPrice",
+              "show": true
+            }
+          ],
+          "key": "Price.orderLinePriceInline"
+        },
+        {
+          "key": "Price.orderLineCardProps",
+          // suppress complete pricing card / UI
+          "show": true
+        },
+        {
+          "elements": [
+            {
+              "key": "editOrderLinePrice",
+              "readOnly": false,
+              "show": true
+            },
+            {
+              "key": "editOrderLineDiscount",
+              "show": true
+            },
+            {
+              "key": "propStockQuantity",
+              "show": true
+            },
+            {
+              "key": "propListPrice",
+              "show": true
+            },
+            {
+              "key": "propLockType",
+              "show": true
+            },
+            {
+              "key": "propSalesUnitQty",
+              "show": true
+            }
+          ],
+          "key": "editOrderLinePage"
+        },
+        {
+          "elements": [
+            {
+              //Sichtbarkeit der GMS-Standard-Komponente zur Erfassung von Grund der Beauftragung und
+              //(nicht bei STE verwendeter) Symptom-Struktur - bei STE nicht genutzt
+              "key": "errorDescription",
+              "show": true
+            },
+            {
+              //Sichtbarkeit des Felds "Grund der Beauftragung" zur direkten Eingabe
+              "key": "errorDescriptionInline",
+              "show": false
+            },
+            {
+              //Sichtbarkeit Feld zur Angabe der Auftrags-Aktivität
+              "key": "orderTypeActivityType",
+              "show": true
+            },
+            {
+              //Sichtbarkeit Feld Interne Bemerkung an Techniker / Partner
+              "key": "description",
+              "show": true
+            },
+            //Reihenfolge der einzelnen Module der Auftragskopie-Anlage
+            {
+              //Auftragsart und Aktivität
+              "key": "OrderSection",
+              "sort": 10
+            },
+            {
+              //Gerät (OrderItem)
+              "key": "InstalledBaseSection",
+              "sort": 20
+            },
+            {
+              //Vertragsinformationen
+              "key": "ContractSection",
+              "sort": 30
+            },
+            {
+              //Grund der Beauftragung
+              "key": "ErrorDescriptionSection",
+              "sort": 40
+            },
+            {
+              //Auftragsrollen
+              "key": "OrderRolesSection",
+              "sort": 50
+            },
+            {
+              //Terminierung - Bei STE nicht im Einsatz
+              "key": "TimeSection",
+              "show": true,
+              "sort": 60
+            }
+          ],
+          //Order Creation offline | Fields
+          "key": "orderCreationPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "jobPrice", // price for job
+              "show": true
+            },
+            {
+              "key": "orderPrice", // total price for order
+              "show": true
+            },
+            {
+              "key": "description", // order.SER__Description__c
+              "show": true
+            },
+            {
+              "key": "orderItemsCard", // order items card (DeviceOverviewCard)
+              "show": true
+            }
+          ],
+          // Service Report
+          "key": "sectionServiceReport"
+        },
+        {
+          "elements": [
+            {
+              "key": "buttonServiceReportPreview", // Schaltfläche "Servicebericht Vorschau"/"Preview" anzeigen
+              "show": false // change it only when you know what that is and was this is doing
+            }
+          ],
+          "key": "appointmentPreview" // Service Report preview as PDF
+        },
+        {
+          "elements": [
+            {
+              // EditErrorDescriptionPage
+              "key": "errorDescriptionEditPage",
+              "readOnly": false
+            },
+            {
+              // Edit IB
+              "key": "InstalledBaseEditPage",
+              "readOnly": false
+            },
+            {
+              // Change Product Model on IB
+              "key": "productModelEditPage",
+              "readOnly": false
+            },
+            {
+              // Change Reference Numbers
+              "key": "ContractReference",
+              "readOnly": false
+            }
+          ],
+          // Configuration for Installed Base Editing Options
+          // default all changes are enabled, readOnly = true will limit the change options
+          "key": "PermissionSet"
+        },
+        {
+          "elements": [
+            {
+              "key": "errorDescription",
+              "show": true
+            },
+            {
+              "key": "errorDescriptionInline",
+              "show": false
+            }
+          ],
+          "key": "orderCreationPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "engineers",
+              "show": true
+            },
+            {
+              "key": "date",
+              "show": true
+            },
+            {
+              "key": "status",
+              "show": true
+            },
+            {
+              "key": "invoicingType",
+              "show": true
+            },
+            {
+              "key": "followup1",
+              "show": true
+            },
+            {
+              "key": "failureType",
+              "show": true
+            }
+          ],
+          "key": "orderHistoryOrderPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "date",
+              "show": true
+            },
+            {
+              "key": "status",
+              "show": true
+            },
+            {
+              "key": "engineers",
+              "show": true
+            },
+            {
+              "key": "contactName",
+              "show": true
+            },
+            {
+              "key": "invoicingText",
+              "show": true
+            },
+            {
+              "key": "errorText",
+              "show": true
+            },
+            {
+              "key": "followup1",
+              "show": true
+            },
+            {
+              "key": "followup2",
+              "show": true
+            },
+            {
+              "key": "failureType",
+              "show": true
+            }
+          ],
+          "key": "orderDetailsOrderSection"
+        },
+        {
+          "elements": [
+            {
+              "key": "InstalledBaseEditPageSerialNumberEdit",
+              "readOnly": true
+            }
+          ],
+          "key": "InstalledBaseEditPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "InstalledBaseEditPageSerialNumberEdit",
+              "readOnly": true
+            }
+          ],
+          "key": "InstalledBaseOutlinePage"
+        },
+        {
+          "elements": [
+            {
+              "key": "workResultEdit",
+              "show": true
+            },
+            {
+              "key": "descriptionEdit",
+              "show": true
+            }
+          ],
+          "key": "deviceStatusStep",
+          "show": true
+        },
+        {
+          "elements": [
+            {
+              "key": "type",
+              "show": true
+            },
+            {
+              "key": "invoicingno",
+              "show": true
+            },
+            {
+              "key": "description",
+              "show": true
+            },
+            {
+              "key": "activity",
+              "show": true
+            },
+            {
+              "key": "internalinfo",
+              "show": true
+            }
+          ],
+          "key": "orderCard"
+        }
+      ],
+      //Konfiguration der Zeitnachweise / Nebenzeiten hinsichtlich Sortierung und Sichtbarkeit (inkl. Kontext)
+      "fsoTimeReportTypes": [
+        {
+          "default": true,
+          "key": "#~DEF~#",
+          "show": {
+            // time report type shown within job tab
+            "job": true,
+            // time report type shown in timeSheet module
+            "timeSheet": true
+          },
+          "validate": {
+            "future": {
+              // end time of time report only allowed to be "start" minutes in the future
+              "end": null,
+              // start time of time report only allowed to be "start" minutes in the future
+              "start": null
+            }
+          }
+        },
+        {
+          // Beginn
+          "key": "7501",
+          "show": {
+            "job": false,
+            "mileage": true, // show / edit mileage field. Default true, but always false if "disabled" by configTimeSheet.distanceTracking
+            "timeSheet": false // only limit "time report edit", does not deactivate "set timesheet start"
+          },
+          "compensationTypes": [
+            "7701",
+            "7702",
+            "7703",
+            "7704",
+            "7705"
+          ],
+          "sort": 100
+        },
+        {
+          "category": "work",
+          "key": "--Activity DEF--",
+          "show": {
+            "job": true,
+            "mileage": true, // show / edit mileage field. Default true, but always false if "disabled" by configTimeSheet.distanceTracking
+            "timeSheet": true // only limit "time report edit", does not deactivate "set timesheet start"
+          },
+          "compensationTypes": [
+            "7701",
+            "7702",
+            "7703",
+            "7704",
+            "7705"
+          ],
+          "sort": 120,
+          "isActivityRelated": true
+        },
+        {
+          "category": "work",
+          "key": "Activity A",
+          "show": {
+            "job": true,
+            "mileage": true, // show / edit mileage field. Default true, but always false if "disabled" by configTimeSheet.distanceTracking
+            "timeSheet": true // only limit "time report edit", does not deactivate "set timesheet start"
+          },
+          "compensationTypes": [
+            "7701",
+            "7702",
+            "7703",
+            "7704",
+            "7705"
+          ],
+          "sort": 120,
+          "isActivityRelated": true
+        },
+        {
+          //Ende
+          "key": "7502",
+          "show": {
+            "job": false,
+            "mileage": true, // show / edit mileage field. Default true, but if configTimeSheet.distanceTracking = "disabled" then always false
+            "timeSheet": false // only limit "time report edit", does not deactivate "set timesheet end"
+          },
+          "compensationTypes": [
+            "7701",
+            "7702",
+            "7703",
+            "7704",
+            "7705"
+          ],
+          "sort": 200
+        },
+        {
+          "category": "travel",
+          //Fahrtzeit
+          "key": "7505",
+          "show": {
+            "job": true,
+            "timeSheet": false
+          },
+          "sort": 300,
+          //required for conf order line feature
+          "relatedTo": "Driving Time", // Must match one picklist value on SF SER__SCCOnfOrderLine__c.SER__RelatedTo__c
+          "compensationTypes": [
+            "7701",
+            "7703",
+            "7704",
+            "7705"
+          ]
+        },
+        {
+          "category": "work",
+          //Arbeitszeit
+          "key": "7503",
+          "show": {
+            "job": true,
+            "timeSheet": false
+          },
+          "sort": 400,
+          //required for conf order line feature
+          "relatedTo": "Working Time", // Must match one picklist value on SF SER__SCCOnfOrderLine__c.SER__RelatedTo__c
+          "compensationTypes": [
+            "7701",
+            "7703",
+            "7704",
+            "7705"
+          ]
+        },
+        {
+          // Pause
+          "key": "7504",
+          "show": {
+            "job": true,
+            "timeSheet": true,
+            "mileage": false
+          },
+          "compensationTypes": [
+            "7701",
+            "7703"
+          ],
+          "sort": 600
+        },
+        {
+          // Wartzeit
+          "key": "7506",
+          "show": {
+            "job": false,
+            "timeSheet": true,
+            "mileage": false
+          },
+          "compensationTypes": [
+            "7701",
+            "7703",
+            "7704",
+            "7705"
+          ],
+          "sort": 1400
+        },
+        {
+          // Besprechung
+          "key": "7507",
+          "show": {
+            "job": false,
+            "timeSheet": true,
+            "mileage": false
+          },
+          "compensationTypes": [
+            "7701"
+          ],
+          "sort": 1500
+        }
+      ],
+      "fsoWebCallTypes": [
+        //Online-Funktionen im System-Standard-Browser öffnen (bis auf Widerruf so konfigurieren)
+        {
+          //Touren-Anzeige "Karten"
+          "key": "page.tourMap",
+          //false = im Browser öffnen, true = im Service1mobile integrierten Browser anzeigen (aktuell nicht möglich)
+          "openInline": false,
+          //URL zur Page
+          "relativeUrl": "/c/SCltngMobileAppointmentMap.app"
+        },
+        {
+          // Service Console to create new orders (full search options)
+          "key": "page.serviceConsole",
+          "openInline": false,
+          "relativeUrl": "/c/SCltngMobileServiceConsole.app"
+        },
+        {
+          // Self Dispatch / Search for nearby orders
+          "key": "page.orderAssignment",
+          "openInline": false,
+          "relativeUrl": "/c/SCtlngMobileOrderAssignment.app"
+        },
+        {
+          // Auftrags-Historie Online
+          "key": "page.deviceHistory",
+          "openInline": false,
+          "relativeUrl": "/c/SCltngMobileServiceHistory.app"
+        },
+        {
+          // Online Attachment in Order Tab
+          "key": "page.attachments",
+          "openInline": false,
+          // Parameter: parentId = order.id
+          "relativeUrl": "/c/SCLtngAttachments.app"
+        },
+        {
+          "key": "page.fileView",
+          // special handling for files "open online"
+          // use relative Url for backend Url, because the file Url (shepard...) is dynamically determined
+          //"relativeUrl": "https://<myDomain>.sandbox.lightning.force.com",
+          "openInline": true
+        },
+        {
+          // Followup Appointment Online
+          "key": "page.followupAppointment",
+          "openInline": false,
+          "relativeUrl": "/c/SCLtngMobileAppointment.app"
+        },
+        {
+          // Button Knowledge on Device Tab
+          "key": "page.newtonDocuments",
+          "openInline": false,
+          // Parameter: parentId = order.id
+          "relativeUrl": "/c/NewtonDocuments.app"
+        },
+        {
+          // Online allow to add/change order item
+          "key": "page.editOrderItem",
+          "openInline": false,
+          // Parameter: c__orderId
+          "relativeUrl": "/c/SCLtngMobileEditOrder.app"
+        }
+      ],
+      "fsoWorkResults": [
+        {
+          "category": "completed",
+          "colorStyle": "positive",
+          "iconKey": "Check",
+          "key": "Completed",
+          "show": true
+        },
+        {
+          "category": "followUp",
+          "colorStyle": "attention",
+          "iconKey": "Attention",
+          "key": "Not Completed",
+          "show": true
+        },
+        {
+          "category": "followUp",
+          "colorStyle": "attention",
+          "iconKey": "Attention",
+          "key": "Repair Pending",
+          "show": true
+        },
+        {
+          "category": "failed",
+          "colorStyle": "danger",
+          "iconKey": "Forbidden",
+          "key": "Access denied",
+          "show": true
+        },
+        {
+          "category": "completed",
+          "colorStyle": "positive",
+          "iconKey": "Check",
+          "key": "Without Complaint",
+          "show": true
+        },
+        {
+          "category": "followUp",
+          "colorStyle": "attention",
+          "iconKey": "Attention",
+          "key": "Minor Defects",
+          "show": true
+        },
+        {
+          "category": "failed",
+          "colorStyle": "danger",
+          "iconKey": "Forbidden",
+          "key": "Serious Defects",
+          "show": true
+        },
+        {
+          "category": "failed",
+          "colorStyle": "danger",
+          "iconKey": "Forbidden",
+          "key": "Acceptance Failed",
+          "show": true
+        },
+        {
+          "category": "followUp",
+          "colorStyle": "attention",
+          "iconKey": "Attention",
+          "key": "Follow-Up Visit",
+          "show": true
+        },
+        {
+          "category": "completed",
+          "colorStyle": "positive",
+          "iconKey": "Check",
+          "key": "Service Completed",
+          "show": true
+        },
+        {
+          "category": "completed",
+          "colorStyle": "positive",
+          "iconKey": "Check",
+          "key": "Service Completed with Deviation",
+          "show": true
+        }
+      ],
+      "fsoWorkStatus": [
+        {
+          "descriptionRequired": false,
+          "key": "open",
+          "show": true,
+          "value": "58701",
+          "workResultRequired": false
+        },
+        {
+          "descriptionRequired": false,
+          "key": "inProgress",
+          "show": true,
+          "value": "58702",
+          "workResultRequired": false
+        },
+        {
+          "descriptionRequired": false,
+          "key": "completed",
+          "show": true,
+          "value": "58703",
+          "workResultRequired": false
+        }
+      ]
+    }
+  }
+]

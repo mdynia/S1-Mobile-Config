@@ -1,0 +1,30 @@
+{
+    "type": "configNotification",
+    "values": {
+      // features "popup Notification" is implicitly used if backend creates MOBILE_POPUP_NOTIFICATION (SCMessage.Type)
+      "popupNotifications": {
+        "$default": {
+          // convenient shortcut to define fallback values for properties for all events
+          /** time frame configuration, starttime of appointment of notification is within this time frame
+           * null <=> no time frame filter, 0 <=> show notification only if appointment is for today,
+           * [-3, 2] <=> show notification if appointment is at least 3 days in the past or 2 days in the future */
+          "displayDays": 0,
+          /** messages older than this (unit days) are not considered, SCMessage.LastModifiedDate
+           *  this applies additionally to further time frame based filtering
+           *  0 <=> no limit on message age
+           *  1 is default */
+          "maxAgeInDays": 1
+        },
+        //
+        // "AppointmentCancelled": {
+        //   "displayDays": 0,
+        //   "maxAgeInDays": 1
+        // },
+        // "AppointmentInserted": {
+        //   "displayDays": 0,
+        //   "maxAgeInDays": 1
+        // }
+        "mode": "disabled" // enables or disables the notifications, options : 'enabled' or 'disabled'
+      }
+    }
+  },
