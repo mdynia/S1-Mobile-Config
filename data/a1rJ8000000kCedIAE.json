@@ -1,0 +1,11 @@
+[
+  {
+    "type": "quotation",
+    "values": {
+      "jobFinishFlow": {
+        "showSummaryCard": false,
+        "ensureFinishJobWithValidQuotationStatus": true
+      }
+    }
+  }
+]

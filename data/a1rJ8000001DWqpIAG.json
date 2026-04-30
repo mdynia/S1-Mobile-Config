@@ -1,7 +1,45 @@
-{
-    "type": "configuration",
+[
+  {
+    "type": "configTimeSheet",
     "values": {
-      // OrdersAtLocation defines wether "Orders at Location" menu item should be shown or not, values: enable, disable (= default)
-      "OrdersAtLocation": "enable"
+      "break": {
+        "breakType": "mandatory",
+        "breakMinMinutes": 30,
+        "breakAfterHours": 6
+      },
+      "overTime": {
+        "overtimeReason": "enable",
+
+        "overtimeReasonAfterHours": 10
+      },
+      "workingHoursRelatedCategories": {
+        "type": "include",
+        "values": ["work", "travel"]
+      },
+      "addingTimesBehavior": "recommended",
+      "calendarDayInJob": "lastTimeSheet",
+      "clockInDays": 0,
+      "commit": "job",
+      "dateMonthLimit": 1,
+      "distanceGrid": 1,
+      "distanceTracking": "mileage",
+      "forceClockIn": false,
+      "jobSuggestionMode": "off",
+      "jobValidations": "on",
+      "maxTimesheetDuration": 24,
+      "minuteGrid": 15,
+      "compensationType": "enable",
+      "mode": "strict",
+      "startEnd": "auto",
+      "timeReportEntryType": "list",
+      "enableDeviceSpecificTimeReporting": true,
+      "allowEmptyDeviceSelection": true,
+      "preventDevicePreselectionInJobContextOfSingleDeviceJobs": true,
+      "startEndClockIn": "enable",
+      "timesheetSplitDuration": 12,
+      "uncommittedTimeSheetLimit": 3,
+      "uncommittedTimesMaxPeriod": 27,
+      "activitiesAsTimeReportType": "combined"
     }
-}
+  }
+]

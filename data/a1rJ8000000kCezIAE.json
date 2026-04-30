@@ -1,0 +1,1872 @@
+[
+  {
+    "type": "fsoTypes",
+    "values": {
+      "fsoOvertimeReasons": [
+        {
+          "key": "600",
+          "sort": "10"
+        },
+        {
+          "key": "601",
+          "sort": "20"
+        },
+        {
+          "key": "602"
+        }
+      ],
+      "fsoAccountTypes": [
+        {
+          "key": "Customer",
+          "readOnly": {
+            "country": true
+          },
+          "required": {
+            "city": true,
+            "houseNo": true,
+            "localeSidKey": true,
+            "name1": true,
+            "postalCode": true,
+            "street": true
+          }
+        },
+        {
+          "key": "Partner",
+          "readOnly": {
+            "city": true,
+            "country": true,
+            "email": true,
+            "extension": true,
+            "houseNo": true,
+            "localeSidKey": true,
+            "mobilePhone": true,
+            "name1": true,
+            "name2": true,
+            "phone": true,
+            "postalCode": true,
+            "street": true
+          }
+        }
+      ],
+      "fsoAppointmentTypes": [
+        {
+          "default": true,
+          "key": "#~DEF~#",
+          "overview": {}
+        },
+        {
+          "key": "7407",
+          "overview": {
+            "grouping": "daily-reminder"
+          }
+        },
+        {
+          "key": "7440",
+          "overview": {
+            "grouping": "daily-replace"
+          }
+        }
+      ],
+      "fsoAttachmentCategories": [
+        {
+          "availableToEngineer": false,
+          "colorStyle": "accent2",
+          "key": "checklist",
+          "relevanceInDropdown": 1600,
+          "relevanceInTab": 1100
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "attention",
+          "key": "damagePhoto",
+          "relevanceInDropdown": 1600,
+          "relevanceInTab": 1100
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "accent2",
+          "key": "drawing",
+          "relevanceInDropdown": 1500,
+          "relevanceInTab": 1200
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "guaranteeProof",
+          "relevanceInDropdown": 1400,
+          "relevanceInTab": 400
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "attention",
+          "key": "guideline",
+          "relevanceInDropdown": 1300,
+          "relevanceInTab": 1500
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "accent2",
+          "key": "installationDetails",
+          "relevanceInDropdown": 1200,
+          "relevanceInTab": 1300
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "installationProof",
+          "relevanceInDropdown": 1100,
+          "relevanceInTab": 500
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "neutral",
+          "key": "instructions",
+          "relevanceInDropdown": 1000,
+          "relevanceInTab": 700
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "invoice",
+          "relevanceInDropdown": 900,
+          "relevanceInTab": 200
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "accent2",
+          "key": "locationMap",
+          "relevanceInDropdown": 800,
+          "relevanceInTab": 1400
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "attention",
+          "key": "logFile",
+          "relevanceInDropdown": 700,
+          "relevanceInTab": 1000
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "neutral",
+          "key": "manual",
+          "relevanceInDropdown": 600,
+          "relevanceInTab": 800
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "meterReading",
+          "relevanceInDropdown": 500,
+          "relevanceInTab": 600
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "neutral",
+          "key": "operatingInstructions",
+          "relevanceInDropdown": 400,
+          "relevanceInTab": 900
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "neutral",
+          "key": "other",
+          "relevanceInDropdown": 0,
+          "relevanceInTab": 0
+        },
+        {
+          "availableToEngineer": true,
+          "colorStyle": "positive",
+          "key": "report",
+          "relevanceInDropdown": 300,
+          "relevanceInTab": 300
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "attention",
+          "key": "safetyInstructions",
+          "relevanceInDropdown": 200,
+          "relevanceInTab": 1600
+        },
+        {
+          "availableToEngineer": false,
+          "colorStyle": "attention",
+          "key": "checklist",
+          "relevanceInDropdown": 200,
+          "relevanceInTab": 1600
+        }
+      ],
+      "fsoCustomerTimeWindow": [
+        {
+          "default": true,
+          "fields": ["timewindowtype", "timewindow-start-end"],
+          "key": "#~DEF~#"
+        }
+      ],
+      "fsoDeviceFinishes": [],
+      "fsoFollowUp1Types": [
+        {
+          "followUp2Keys": ["2901"],
+          "key": "2801"
+        },
+        {
+          "followUp2Keys": ["2902", "2903", "2904", "2950"],
+          "key": "2802"
+        },
+        {
+          "followUp2Keys": ["2951", "2952"],
+
+          "key": "2804"
+        },
+        {
+          "followUp2Keys": ["2953", "2954"],
+
+          "key": "2845"
+        }
+      ],
+      "fsoFollowUp2Types": [
+        {
+          "actions": {
+            "dispatchAppointment": true
+          },
+          "default": true,
+          "key": "#~DEF~#"
+        },
+        {
+          "actions": {
+            "dispatchAppointment": true
+          },
+          "key": "2901",
+          "show": true,
+          "sort": 100,
+          "validate": {
+            "timereport": {
+              "types": ["7503", "7505"]
+            }
+          }
+        },
+        {
+          "key": "2902",
+          "show": true
+        },
+        {
+          "key": "2903",
+          "show": true
+        },
+        {
+          "key": "2904",
+          "show": true
+        }
+      ],
+      "fsoInvoicingTypes": [
+        {
+          "default": true,
+          "key": "#~DEF~#",
+          "required": {
+            "engineerSignature": "signAlways"
+          }
+        },
+        {
+          "key": "170001",
+          "show": true,
+          "sort": 50
+        },
+        {
+          "key": "170002",
+          "show": true,
+          "sort": 100
+        },
+        {
+          "key": "170003",
+          "show": true,
+          "sort": 150
+        },
+        {
+          "key": "170004",
+          "show": true,
+          "sort": 200
+        },
+        {
+          "key": "170005",
+          "show": true,
+          "sort": 250
+        },
+        {
+          "key": "170006",
+          "show": true,
+          "sort": 300
+        }
+      ],
+      "fsoJobFilter": [
+        {
+          "key": "notCompleted",
+          "sortReverse": true
+        }
+      ],
+      "fsoJobFinishes": [],
+      "fsoOrderContact": [
+        {
+          "key": "#~DEF~#",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": ""
+        },
+        {
+          "key": "editContactPage.firstnameID",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": ""
+        },
+        {
+          "key": "editContactTabPage.LastnameOrCompanyID",
+          "show": true,
+          "mandatory": true,
+          "DefaultValue": ""
+        },
+        {
+          "key": "editContactTabPage.phoneID",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": "Phone Test default"
+        },
+        {
+          "key": "editContactTabPage.emailID",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": ""
+        },
+        {
+          "key": "editContactTabPage.DepartmentID",
+          "show": true,
+          "mandatory": false,
+          "DefaultValue": ""
+        }
+      ],
+      "fsoJobMenus": [
+        {
+          "key": "jobListCreateOrder",
+          "show": true
+        },
+        {
+          "key": "DebugDumpAppointmentMenuItem",
+          "show": true
+        },
+        {
+          "key": "ApplyTemplatesMenuItem",
+          "show": true
+        },
+        {
+          "key": "RejectJobMenuItem",
+          "show": true
+        },
+        {
+          "key": "CancelJobMenuItem",
+          "show": true
+        },
+        {
+          "key": "TasksSubMenuMenuItem",
+          "show": true
+        },
+        {
+          "key": "CreateOrderMenuItem",
+          "show": true
+        },
+        {
+          "key": "ChangeProductMenuItem",
+          "show": true
+        },
+        {
+          "key": "ImportQuotationItemsMenuItem",
+          "show": true
+        },
+        {
+          "key": "ListContactsMenuItem",
+          "show": true
+        },
+        {
+          "key": "DevicesAtLocationMenuItem",
+          "show": true
+        },
+        {
+          "key": "ServiceReportMenuItem",
+          "show": true
+        },
+        {
+          "key": "QuotationJobMenuItem",
+          "show": true
+        },
+        {
+          "key": "orderItem.CompleteOrderItemMenuItem",
+          "show": true
+        },
+        {
+          "key": "orderItem.ApplyTemplatesMenuItem",
+          "show": true
+        },
+        {
+          "key": "orderItem.TasksSubMenuMenuItem",
+          "show": true
+        }
+      ],
+
+      "fsoJobStatuses": [
+        {
+          "color": "neutral",
+          "icon": "Stop",
+          "isDefaultValue": true,
+          "key": "Open",
+          "locationRelated": false,
+          "nextValue": ["Drive"]
+        },
+        {
+          "color": "attention",
+          "icon": "Vehicle",
+          "key": "Drive",
+          "locationRelated": false,
+          "nextValue": ["In Progress", "Delay"]
+        },
+        {
+          "color": "danger",
+          "icon": "ClockForwards",
+          "key": "Delay",
+          "locationRelated": false,
+          "nextValue": ["In Progress"]
+        },
+        {
+          "color": "accent2",
+          "icon": "Play",
+          "key": "In Progress",
+          "locationRelated": true,
+          "nextValue": ["Completed", "On Hold"]
+        },
+        {
+          "color": "brand",
+          "icon": "Pause",
+          "key": "On Hold",
+          "locationRelated": true,
+          "nextValue": ["In Progress"]
+        },
+        {
+          "color": "positive",
+          "icon": "Check",
+          "isDefaultForJobFinish": true,
+          "key": "Completed",
+          "locationRelated": true,
+          "nextValue": []
+        }
+      ],
+      "fsoJobTabs": [
+        {
+          "key": "attachmentTab"
+        },
+        {
+          "cards": [
+            {
+              "key": "engineerResponsibleCard",
+              "sort": 50
+            },
+            {
+              "key": "priorityCard",
+              "layout": [2, [1, 2], [1, 2]],
+              "sort": 100
+            },
+            {
+              "key": "noteCard",
+              "sort": 150
+            },
+            {
+              "key": "teamCard",
+              "sort": 200
+            },
+            {
+              "key": "customerCard",
+              "sort": 250
+            },
+            {
+              "key": "orderRolesCard",
+              "sort": 275
+            },
+            {
+              "key": "orderCard",
+              "sort": 300
+            },
+            {
+              "key": "invoiceTextCard",
+              "sort": 350
+            },
+            {
+              "key": "internalNoteCard",
+              "sort": 380
+            },
+            {
+              "key": "partsOutlineCard",
+              "sort": 400
+            },
+            {
+              "key": "servicesOutlineCard",
+              "sort": 450
+            },
+            {
+              "key": "quotationsOutlineCard",
+              "sort": 480
+            }
+          ],
+          "itemLevel": false,
+          "key": "orderOverviewTab",
+          "show": true,
+          "sort": 10
+        },
+        {
+          "key": "fastTrackTabExtension",
+          "sort": 1100
+        },
+        {
+          "key": "partsTabExtension",
+          "sort": 300
+        },
+        {
+          "key": "timesTabExtension",
+          "sort": 200
+        },
+        {
+          "key": "orderRepairCodeTab",
+          "show": true,
+          "sort": 999
+        },
+        {
+          "itemLevel": true,
+          "key": "workDescriptionEditTab",
+          "orderLevel": true,
+          "show": true,
+          "sort": 1250
+        },
+        {
+          "key": "servicesTabExtension"
+        },
+        {
+          "key": "serviceItemsTab"
+        },
+        {
+          "key": "contactEditTab",
+          "sort": 1250
+        },
+        {
+          "key": "jobDaysTab",
+          "sort": 1075
+        },
+        {
+          "cards": [
+            {
+              "key": "engineerResponsibleCard",
+              "sort": 100
+            },
+            {
+              "key": "noteCard",
+              "sort": 200
+            },
+            {
+              "key": "teamCard",
+              "sort": 300
+            },
+            {
+              "key": "customerCard",
+              "sort": 400
+            },
+            {
+              "key": "additionalCustomerInfoCard",
+              "sort": 450
+            },
+            {
+              "key": "orderRolesCard",
+              "sort": 450
+            },
+            {
+              "key": "attachmentButton",
+              "sort": 500
+            },
+            {
+              "key": "appointmentCard",
+              "sort": 600
+            },
+            {
+              "key": "orderCard",
+              "sort": 700
+            },
+            {
+              "key": "ContractReference",
+              "sort": 750
+            },
+            {
+              "key": "priorityCard",
+              "sort": 800
+            },
+            {
+              "key": "priceUiElements",
+              "sort": 900
+            },
+            {
+              "key": "jobQuotationCard",
+              "sort": 11
+            },
+            {
+              "key": "invoiceTextCard",
+              "sort": 1100
+            },
+            {
+              "key": "followupDescriptionCard",
+              "sort": 1150
+            },
+            {
+              "key": "assignmentCard",
+              "sort": 1200
+            },
+            {
+              "key": "slaCard",
+              "sort": 1300
+            },
+            {
+              "key": "orderItemsCard",
+              "sort": 1400
+            }
+          ],
+          "key": "jobOutlineTab"
+        },
+        {
+          "cards": [
+            {
+              "key": "orderItemStatusCard",
+              "sort": 100
+            },
+            {
+              "key": "deviceStatusDetailCard",
+              "sort": 150
+            },
+            {
+              "key": "noteCard",
+              "sort": 200
+            },
+            {
+              "key": "serialNumberInlineEditElement",
+              "sort": 300
+            },
+            {
+              "key": "newtonDocumentsButton",
+              "sort": 400
+            },
+            {
+              "key": "errorCard",
+              "sort": 500
+            },
+            {
+              "key": "productDetailsCard",
+              "sort": 600
+            },
+            {
+              "key": "deviceIdentificationCard",
+              "sort": 700
+            },
+            {
+              "key": "warrantyCard",
+              "sort": 800
+            },
+            {
+              "key": "deviceDateCard",
+              "sort": 900
+            },
+            {
+              "key": "maintenanceCard",
+              "sort": 1000
+            },
+            {
+              "key": "historyCard",
+              "sort": 1100
+            },
+            {
+              "key": "deviceAttachmentCard",
+              "sort": 1200
+            }
+          ],
+
+          "key": "deviceOutlineTab"
+        },
+        {
+          "key": "orderItemHistoryTab",
+          "show": true,
+          "sort": 550
+        },
+        {
+          "itemLevel": true,
+          "key": "checklistTabExtension",
+          "orderLevel": true,
+          "sort": 700
+        },
+        {
+          "key": "importantChecklistTabTabExtension",
+          "show": true
+        },
+        {
+          "cards": [
+            {
+              "key": "serialNumberInlineEditElement",
+              "show": true
+            },
+            {
+              "key": "productCard",
+              "show": true
+            },
+            {
+              "key": "deviceIdentificationCard",
+              "show": true
+            },
+            {
+              "key": "warrantyCard",
+              "show": true
+            },
+            {
+              "key": "customerCard",
+              "show": true
+            },
+            {
+              "key": "maintenanceCard",
+              "show": true
+            },
+            {
+              "key": "historyCard",
+              "show": true
+            },
+            {
+              "key": "contactCard",
+              "show": true
+            }
+          ],
+          "key": "InstalledBaseOutlinePage",
+          "show": true
+        },
+        {
+          "key": "installedBaseHierarchyTab",
+          "show": true,
+          "orderLevel": true,
+          "itemLevel": false
+        }
+      ],
+
+      "fsoMaterialUnitQtyRules": [
+        {
+          "key": "KGM",
+
+          "maxNumberOfDecimalDigits": 2,
+
+          "stepValue": 0.05
+        },
+        {
+          "key": "STD",
+          "maxNumberOfDecimalDigits": 2,
+          "stepValue": 0.25
+        },
+        {
+          "key": "ST",
+          "maxNumberOfDecimalDigits": 2,
+          "stepValue": 1
+        },
+        {
+          "key": "G",
+          "maxNumberOfDecimalDigits": 0,
+          "stepValue": 100
+        }
+      ],
+
+      "fsoOrderRoleTypes": [
+        {
+          "default": "true",
+          "invisible": {
+            "extension": true
+          },
+          "key": "#~DEF~#",
+
+          "sorting": {
+            "city": 900,
+            "country": 1000,
+            "email": 300,
+            "houseNo": 700,
+            "localeSidKey": 1100,
+            "mobilePhone": 400,
+            "name1": 100,
+            "name2": 200,
+            "name3": 210,
+            "name4": 220,
+            "phone": 500,
+            "postalCode": 800,
+            "street": 600
+          }
+        },
+        {
+          "invisible": {
+            "city": true,
+            "country": true,
+            "extension": true,
+            "houseNo": true,
+            "postalCode": true,
+            "street": true
+          },
+          "key": "Contact",
+          "required": {
+            "city": false,
+            "country": false,
+            "extension": false,
+            "houseNo": false,
+            "localeSidKey": true,
+            "name1": true,
+            "postalCode": false,
+            "street": false
+          }
+        },
+        {
+          "key": "50301",
+
+          "readOnly": {
+            "city": false,
+            "country": false,
+            "email": false,
+            "extension": false,
+            "houseNo": false,
+            "localeSidKey": false,
+            "mobilePhone": false,
+            "name1": false,
+            "name2": false,
+            "phone": false,
+            "postalCode": false,
+            "street": false
+          }
+        },
+        {
+          "key": "50302",
+
+          "readOnly": {
+            "city": true,
+            "country": true,
+            "email": true,
+            "extension": true,
+            "houseNo": true,
+            "localeSidKey": true,
+            "mobilePhone": true,
+            "name1": true,
+            "name2": true,
+            "phone": true,
+            "postalCode": true,
+            "street": true
+          }
+        }
+      ],
+
+      "fsoOrderTypes": [
+        {
+          "default": true,
+          "key": "#~DEF~#",
+          "required": {
+            "repairCode": false,
+            "repairCodeFields": [""],
+            "order": {
+              "repairCode": "hint"
+            },
+            "orderItem": {
+              "repairCode": "hint"
+            }
+          }
+        },
+        {
+          "activityKeys": ["Error_Analysis_Necassary", "Compressor"],
+
+          "invoiceTypeKeys": ["170001", "170002", "170003", "170004", "170005"],
+
+          "key": "5701",
+          "required": {
+            "orderItemCompletionStatus": true,
+
+            "repairCode": true,
+            "order": {
+              "repairCode": "hint"
+            },
+            "orderItem": {
+              "repairCode": "hint"
+            }
+          },
+          "show": {
+            "offlineAvailable": true
+          }
+        },
+        {
+          "activityKeys": ["Standard"],
+          "invoiceTypeKeys": ["170001", "170004", "170005"],
+
+          "key": "5705",
+          "required": {
+            "repairCode": false,
+            "order": {
+              "repairCode": null
+            },
+            "orderItem": {
+              "repairCode": null
+            }
+          },
+          "show": {
+            "offlineAvailable": false
+          }
+        },
+        {
+          "activityKeys": ["Standard"],
+          "invoiceTypeKeys": ["170001"],
+
+          "key": "5706",
+          "required": {
+            "repairCode": false
+          },
+          "show": {
+            "offlineAvailable": true
+          }
+        },
+        {
+          "activityKeys": ["Standard"],
+          "invoiceTypeKeys": ["170001", "170004", "170005"],
+
+          "key": "5707",
+          "required": {
+            "repairCode": false
+          },
+          "show": {
+            "offlineAvailable": true
+          }
+        }
+      ],
+
+      "fsoQuotationStatus": [
+        {
+          "key": "Accepted",
+          "required": {
+            "customerSignature": true,
+
+            "engineerSignature": true
+          },
+
+          "show": true
+        },
+        {
+          "key": "Postponed",
+          "required": {
+            "customerSignature": false,
+            "engineerSignature": false
+          },
+          "show": true
+        },
+        {
+          "key": "Rejected",
+          "required": {
+            "customerSignature": false,
+            "engineerSignature": false
+          },
+          "show": true
+        }
+      ],
+      "fsoDeviceErrorDescription": [
+        {
+          "default": true,
+          "dependencyMapErrorSymptom1To2": {
+            "01": ["011", "012", "013"],
+            "500": ["014", "500"],
+
+            "02": ["021", "022", "023"],
+
+            "03": ["031", "032"],
+
+            "04": ["041", "042"]
+          },
+          "dependencyMapErrorSymptom2To3": {
+            "011": ["0011", "0012", "0013"],
+
+            "012": ["0011", "0012", "0013"],
+
+            "013": ["0011", "0012", "0013"],
+
+            "014": ["0011", "0012", "0013"],
+
+            "500": ["500"],
+
+            "021": ["0021", "0022"],
+
+            "022": ["0021", "0022"],
+
+            "023": ["0021", "0022"],
+
+            "031": ["0031", "0032"],
+
+            "032": ["0031", "0032"],
+
+            "041": ["0041", "0042"],
+
+            "042": ["0041", "0042"]
+          },
+          "key": "#~DEF~#"
+        }
+      ],
+      "fsoRepairCodes": [
+        {
+          "default": true,
+          "dependencyMapErrorActivity1To2": {
+            "01": ["001", "002"],
+            "02": ["003", "004", "005", "006"],
+            "03": ["004", "005", "006"],
+            "04": ["003", "005"],
+            "05": ["003", "005", "007"],
+            "06": ["004"],
+            "07": ["003", "005", "007"],
+            "08": ["004"],
+            "09": ["004", "005"],
+            "10": ["003", "004", "005", "007"]
+          },
+          "dependencyMapErrorLocation1To2": {
+            "01": ["001"],
+            "02": ["002", "003"],
+            "03": ["001", "003"],
+            "04": ["001", "002", "003"],
+            "05": ["001", "002", "003"],
+            "06": ["001", "002", "003"],
+            "07": ["001", "002", "003"],
+            "08": ["001", "002", "003"],
+            "09": ["001", "002", "003"],
+            "10": ["001", "002", "003"]
+          },
+          "dependencyMapErrorType1To2": {
+            "01": ["001", "002", "003"],
+            "02": ["001", "002", "004"],
+            "03": ["001", "002", "005"],
+            "04": ["001", "002", "006"],
+            "05": ["001", "002", "007"],
+            "06": ["001", "002", "008"],
+            "07": ["001", "002", "009"],
+            "08": ["001", "002", "010"],
+            "09": ["001", "002", "011"],
+            "10": ["001", "002", "012"]
+          },
+
+          "errorSymptomLst": ["01", "02", "03", "04"],
+          "key": "#~DEF~#"
+        }
+      ],
+
+      "fsoStockFilter": [
+        {
+          "key": "stock",
+          "show": true,
+          "sort": 10
+        },
+        {
+          "key": "deliveries",
+          "show": true,
+          "sort": 20
+        },
+        {
+          "key": "return",
+          "show": true,
+          "sort": 30
+        },
+        {
+          "key": "transfer",
+          "show": true,
+          "sort": 40
+        },
+        {
+          "key": "order",
+          "show": true,
+          "sort": 50
+        },
+        {
+          "key": "allMovements",
+          "show": true,
+          "sort": 60
+        },
+        {
+          "key": "available",
+          "show": true,
+          "sort": 70
+        }
+      ],
+      "fsoTabCards": [
+        {
+          "key": "quotationsTab.QuickAction",
+          "elements": [
+            {
+              "key": "addQuotationFromMaterialMaster",
+              "show": true
+            },
+            {
+              "key": "addQuotationFromStock",
+              "show": true
+            }
+          ]
+        },
+        {
+          "key": "partsTab.QuickAction",
+          "elements": [
+            {
+              "key": "addPartsFromMaterialMaster",
+              "show": true
+            },
+            {
+              "key": "addPartsFromStock",
+              "show": true
+            }
+          ]
+        },
+        {
+          "key": "serviceItemsTab.QuickAction",
+          "elements": [
+            {
+              "key": "addServiceItemFromMaterialMaster",
+              "show": true,
+              "label": "all"
+            },
+            {
+              "key": "addPartFromStock",
+              "show": true
+            }
+          ]
+        },
+        {
+          "key": "resourceEquipmentEditPage",
+          "show": true,
+          "elements": [
+            {
+              "key": "#~DEF~#",
+              "default": true,
+              "show": true
+            },
+            {
+              "key": "2605"
+            },
+            {
+              "key": "2606"
+            }
+          ]
+        },
+        {
+          "key": "orderItemDetailPage",
+          "elements": [
+            {
+              "key": "orderItemDetailInstalledBaseSerialNumberEdit",
+              "readOnly": true
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "key": "matStatus",
+              "show": true
+            },
+            {
+              "key": "orderName",
+              "show": false
+            }
+          ],
+
+          "key": "deliveryMaterialListViewCard"
+        },
+        {
+          "elements": [
+            {
+              "key": "email",
+              "show": true
+            },
+            {
+              "key": "phone",
+              "show": true
+            },
+            {
+              "key": "footer",
+              "show": true
+            }
+          ],
+
+          "key": "teamMemberCard"
+        },
+        {
+          "elements": [
+            {
+              "key": "editSymptomCode1",
+              "show": true
+            },
+            {
+              "key": "editRepairCodeErrorCausingPart",
+              "show": true
+            },
+            {
+              "key": "editRepairCodeEditErrorDesc",
+              "show": true
+            },
+            {
+              "key": "errorArticleCard",
+              "show": true
+            }
+          ],
+          "key": "OrderRepairCodeEditPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "propsErrorLocation1",
+              "show": false
+            },
+            {
+              "key": "propsErrorLocation2",
+              "show": false
+            },
+            {
+              "key": "propsErrorSymptom1",
+              "show": false
+            },
+            {
+              "key": "propsErrorArticle",
+              "show": false
+            }
+          ],
+          "key": "OrderRepairCodeDetailsPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "editJobDiscount",
+              "show": false
+            },
+            {
+              "key": "resetOrderLine",
+              "show": false
+            },
+            {
+              "key": "editNetPrice",
+              "show": false
+            },
+            {
+              "key": "editGrossPrice",
+              "show": false
+            },
+            {
+              "key": "toggleShowHidePrices",
+              "show": false
+            }
+          ],
+
+          "key": "jobOptionsPage"
+        },
+
+        {
+          "elements": [
+            {
+              "key": "tax",
+
+              "show": true
+            }
+          ],
+          "key": "Price.totalPriceUI",
+          "show": true
+        },
+        {
+          "elements": [
+            {
+              "key": "tax",
+              "show": true
+            },
+            {
+              "key": "listPrice",
+              "show": true
+            },
+            {
+              "key": "grossPrice",
+              "show": true
+            },
+            {
+              "key": "unitNetPrice",
+              "show": true
+            },
+            {
+              "key": "positionPrice",
+              "show": true
+            },
+            {
+              "key": "relativeDiscount",
+              "show": true
+            },
+            {
+              "key": "absoluteDiscountToRelativeDiscount",
+              "show": true
+            }
+          ],
+          "key": "Price.orderLinePriceUI"
+        },
+        {
+          "elements": [
+            {
+              "key": "tax",
+              "show": true
+            },
+            {
+              "key": "grossPrice",
+              "show": true
+            },
+            {
+              "key": "netPrice",
+              "show": true
+            }
+          ],
+          "key": "Price.orderLinePriceInline"
+        },
+        {
+          "key": "Price.orderLineCardProps",
+
+          "show": true
+        },
+        {
+          "elements": [
+            {
+              "key": "editOrderLinePrice",
+              "readOnly": false,
+              "show": true
+            },
+            {
+              "key": "editOrderLineDiscount",
+              "show": true
+            },
+            {
+              "key": "propStockQuantity",
+              "show": true
+            },
+            {
+              "key": "propListPrice",
+              "show": true
+            },
+            {
+              "key": "propLockType",
+              "show": true
+            },
+            {
+              "key": "propSalesUnitQty",
+              "show": true
+            }
+          ],
+          "key": "editOrderLinePage"
+        },
+        {
+          "elements": [
+            {
+              "key": "errorDescription",
+              "show": true
+            },
+            {
+              "key": "errorDescriptionInline",
+              "show": false
+            },
+            {
+              "key": "orderTypeActivityType",
+              "show": true
+            },
+            {
+              "key": "description",
+              "show": true
+            },
+
+            {
+              "key": "OrderSection",
+              "sort": 10
+            },
+            {
+              "key": "InstalledBaseSection",
+              "sort": 20
+            },
+            {
+              "key": "ContractSection",
+              "sort": 30
+            },
+            {
+              "key": "ErrorDescriptionSection",
+              "sort": 40
+            },
+            {
+              "key": "OrderRolesSection",
+              "sort": 50
+            },
+            {
+              "key": "TimeSection",
+              "show": true,
+              "sort": 60
+            }
+          ],
+
+          "key": "orderCreationPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "jobPrice",
+              "show": true
+            },
+            {
+              "key": "orderPrice",
+              "show": true
+            },
+            {
+              "key": "description",
+              "show": true
+            },
+            {
+              "key": "orderItemsCard",
+              "show": true
+            }
+          ],
+
+          "key": "sectionServiceReport"
+        },
+        {
+          "elements": [
+            {
+              "key": "buttonServiceReportPreview",
+              "show": false
+            }
+          ],
+          "key": "appointmentPreview"
+        },
+        {
+          "elements": [
+            {
+              "key": "errorDescriptionEditPage",
+              "readOnly": false
+            },
+            {
+              "key": "InstalledBaseEditPage",
+              "readOnly": false
+            },
+            {
+              "key": "productModelEditPage",
+              "readOnly": false
+            },
+            {
+              "key": "ContractReference",
+              "readOnly": false
+            }
+          ],
+
+          "key": "PermissionSet"
+        },
+        {
+          "elements": [
+            {
+              "key": "errorDescription",
+              "show": true
+            },
+            {
+              "key": "errorDescriptionInline",
+              "show": false
+            }
+          ],
+          "key": "orderCreationPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "engineers",
+              "show": true
+            },
+            {
+              "key": "date",
+              "show": true
+            },
+            {
+              "key": "status",
+              "show": true
+            },
+            {
+              "key": "invoicingType",
+              "show": true
+            },
+            {
+              "key": "followup1",
+              "show": true
+            },
+            {
+              "key": "failureType",
+              "show": true
+            }
+          ],
+          "key": "orderHistoryOrderPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "date",
+              "show": true
+            },
+            {
+              "key": "status",
+              "show": true
+            },
+            {
+              "key": "engineers",
+              "show": true
+            },
+            {
+              "key": "contactName",
+              "show": true
+            },
+            {
+              "key": "invoicingText",
+              "show": true
+            },
+            {
+              "key": "errorText",
+              "show": true
+            },
+            {
+              "key": "followup1",
+              "show": true
+            },
+            {
+              "key": "followup2",
+              "show": true
+            },
+            {
+              "key": "failureType",
+              "show": true
+            }
+          ],
+          "key": "orderDetailsOrderSection"
+        },
+        {
+          "elements": [
+            {
+              "key": "InstalledBaseEditPageSerialNumberEdit",
+              "readOnly": true
+            }
+          ],
+          "key": "InstalledBaseEditPage"
+        },
+        {
+          "elements": [
+            {
+              "key": "InstalledBaseEditPageSerialNumberEdit",
+              "readOnly": true
+            }
+          ],
+          "key": "InstalledBaseOutlinePage"
+        },
+        {
+          "elements": [
+            {
+              "key": "workResultEdit",
+              "show": true
+            },
+            {
+              "key": "descriptionEdit",
+              "show": true
+            }
+          ],
+          "key": "deviceStatusStep",
+          "show": true
+        },
+        {
+          "elements": [
+            {
+              "key": "type",
+              "show": true
+            },
+            {
+              "key": "invoicingno",
+              "show": true
+            },
+            {
+              "key": "description",
+              "show": true
+            },
+            {
+              "key": "activity",
+              "show": true
+            },
+            {
+              "key": "internalinfo",
+              "show": true
+            }
+          ],
+          "key": "orderCard"
+        }
+      ],
+
+      "fsoTimeReportTypes": [
+        {
+          "default": true,
+          "key": "#~DEF~#",
+          "show": {
+            "job": true,
+
+            "timeSheet": true
+          },
+          "validate": {
+            "future": {
+              "end": null,
+
+              "start": null
+            }
+          }
+        },
+        {
+          "key": "7501",
+          "show": {
+            "job": false,
+            "mileage": true,
+            "timeSheet": false
+          },
+          "compensationTypes": ["7701", "7702", "7703", "7704", "7705"],
+          "sort": 100
+        },
+        {
+          "category": "work",
+          "key": "--Activity DEF--",
+          "show": {
+            "job": true,
+            "mileage": true,
+            "timeSheet": true
+          },
+          "compensationTypes": ["7701", "7702", "7703", "7704", "7705"],
+          "sort": 120,
+          "isActivityRelated": true
+        },
+        {
+          "category": "work",
+          "key": "Activity A",
+          "show": {
+            "job": true,
+            "mileage": true,
+            "timeSheet": true
+          },
+          "compensationTypes": ["7701", "7702", "7703", "7704", "7705"],
+          "sort": 120,
+          "isActivityRelated": true
+        },
+        {
+          "key": "7502",
+          "show": {
+            "job": false,
+            "mileage": true,
+            "timeSheet": false
+          },
+          "compensationTypes": ["7701", "7702", "7703", "7704", "7705"],
+          "sort": 200
+        },
+        {
+          "category": "travel",
+
+          "key": "7505",
+          "show": {
+            "job": true,
+            "timeSheet": false
+          },
+          "sort": 300,
+
+          "relatedTo": "Driving Time",
+          "compensationTypes": ["7701", "7703", "7704", "7705"]
+        },
+        {
+          "category": "work",
+
+          "key": "7503",
+          "show": {
+            "job": true,
+            "timeSheet": false
+          },
+          "sort": 400,
+
+          "relatedTo": "Working Time",
+          "compensationTypes": ["7701", "7703", "7704", "7705"]
+        },
+        {
+          "key": "7504",
+          "show": {
+            "job": true,
+            "timeSheet": true,
+            "mileage": false
+          },
+          "compensationTypes": ["7701", "7703"],
+          "sort": 600
+        },
+        {
+          "key": "7506",
+          "show": {
+            "job": false,
+            "timeSheet": true,
+            "mileage": false
+          },
+          "compensationTypes": ["7701", "7703", "7704", "7705"],
+          "sort": 1400
+        },
+        {
+          "key": "7507",
+          "show": {
+            "job": false,
+            "timeSheet": true,
+            "mileage": false
+          },
+          "compensationTypes": ["7701"],
+          "sort": 1500
+        }
+      ],
+      "fsoWebCallTypes": [
+        {
+          "key": "page.tourMap",
+
+          "openInline": false,
+
+          "relativeUrl": "/c/SCltngMobileAppointmentMap.app"
+        },
+        {
+          "key": "page.serviceConsole",
+          "openInline": false,
+          "relativeUrl": "/c/SCltngMobileServiceConsole.app"
+        },
+        {
+          "key": "page.orderAssignment",
+          "openInline": false,
+          "relativeUrl": "/c/SCtlngMobileOrderAssignment.app"
+        },
+        {
+          "key": "page.deviceHistory",
+          "openInline": false,
+          "relativeUrl": "/c/SCltngMobileServiceHistory.app"
+        },
+        {
+          "key": "page.attachments",
+          "openInline": false,
+
+          "relativeUrl": "/c/SCLtngAttachments.app"
+        },
+        {
+          "key": "page.fileView",
+
+          "openInline": true
+        },
+        {
+          "key": "page.followupAppointment",
+          "openInline": false,
+          "relativeUrl": "/c/SCLtngMobileAppointment.app"
+        },
+        {
+          "key": "page.newtonDocuments",
+          "openInline": false,
+
+          "relativeUrl": "/c/NewtonDocuments.app"
+        },
+        {
+          "key": "page.editOrderItem",
+          "openInline": false,
+
+          "relativeUrl": "/c/SCLtngMobileEditOrder.app"
+        }
+      ],
+      "fsoWorkResults": [
+        {
+          "category": "completed",
+          "colorStyle": "positive",
+          "iconKey": "Check",
+          "key": "Completed",
+          "show": true
+        },
+        {
+          "category": "followUp",
+          "colorStyle": "attention",
+          "iconKey": "Attention",
+          "key": "Not Completed",
+          "show": true
+        },
+        {
+          "category": "followUp",
+          "colorStyle": "attention",
+          "iconKey": "Attention",
+          "key": "Repair Pending",
+          "show": true
+        },
+        {
+          "category": "failed",
+          "colorStyle": "danger",
+          "iconKey": "Forbidden",
+          "key": "Access denied",
+          "show": true
+        },
+        {
+          "category": "completed",
+          "colorStyle": "positive",
+          "iconKey": "Check",
+          "key": "Without Complaint",
+          "show": true
+        },
+        {
+          "category": "followUp",
+          "colorStyle": "attention",
+          "iconKey": "Attention",
+          "key": "Minor Defects",
+          "show": true
+        },
+        {
+          "category": "failed",
+          "colorStyle": "danger",
+          "iconKey": "Forbidden",
+          "key": "Serious Defects",
+          "show": true
+        },
+        {
+          "category": "failed",
+          "colorStyle": "danger",
+          "iconKey": "Forbidden",
+          "key": "Acceptance Failed",
+          "show": true
+        },
+        {
+          "category": "followUp",
+          "colorStyle": "attention",
+          "iconKey": "Attention",
+          "key": "Follow-Up Visit",
+          "show": true
+        },
+        {
+          "category": "completed",
+          "colorStyle": "positive",
+          "iconKey": "Check",
+          "key": "Service Completed",
+          "show": true
+        },
+        {
+          "category": "completed",
+          "colorStyle": "positive",
+          "iconKey": "Check",
+          "key": "Service Completed with Deviation",
+          "show": true
+        }
+      ],
+      "fsoWorkStatus": [
+        {
+          "descriptionRequired": false,
+          "key": "open",
+          "show": true,
+          "value": "58701",
+          "workResultRequired": false
+        },
+        {
+          "descriptionRequired": false,
+          "key": "inProgress",
+          "show": true,
+          "value": "58702",
+          "workResultRequired": false
+        },
+        {
+          "descriptionRequired": false,
+          "key": "completed",
+          "show": true,
+          "value": "58703",
+          "workResultRequired": false
+        }
+      ]
+    }
+  }
+]

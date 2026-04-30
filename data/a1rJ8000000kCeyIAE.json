@@ -1,0 +1,11 @@
+[
+  {
+    "type": "attachmentConfiguration",
+    "values": {
+      "inlineTileCount": 2,
+      "maxDimension": 3000,
+      "maxSize": 2097152,
+      "permitEditOrderAttachments": false
+    }
+  }
+]

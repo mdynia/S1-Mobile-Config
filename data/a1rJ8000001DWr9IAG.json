@@ -1,28 +1,13 @@
-{
-    // spareParts configuration
+[
+  {
     "type": "sparePartsConfig",
     "values": {
       "sparePartsConfig": {
-        /**
-         * defines the state of the feature 'off' or 'standard', default is 'off'
-         */
         "mode": "standard",
-        /*
-         * defined in number of months, and is a positive integer.
-         */
         "monthInterval": 1,
-        /**
-         * number of times the dialog will be shown.
-         * value must be a non-zero '0' positive integer, e.g. 1, 12, 30, ...
-         * default: 1
-         */
         "minPrice": 50,
-        /**
-         * defines if the list price should be assumed as zero if it is not available or is actually zero.
-         * e.g. configured 'minPrice' is 1, but the list price is 0, then the list price is assumed as 1, otherwise 0.
-         * Default: 'disabled'
-         */
         "assumeZeroListPriceCorrect": "disabled"
       }
     }
   }
+]

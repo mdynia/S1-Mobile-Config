@@ -1,0 +1,8 @@
+[
+  {
+    "type": "addDevicesConfig",
+    "values": {
+      "showAlways": true
+    }
+  }
+]

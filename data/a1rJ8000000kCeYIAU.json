@@ -1,0 +1,365 @@
+[
+  {
+    "type": "customSettings",
+    "values": {
+      "debug": "0",
+      "debug.tracelevel": "3",
+      "logging": {
+        "enabledTags": [
+          "*" // all tags
+        ],
+        "formatting": {
+          "arrayStyle": "stringify", // fallback: 'stringify', 'flatten'
+          "formatJSON": {
+            // false or {indentation: number} -> fallback is false
+            "indentation": 2
+          }
+        },
+        "minimumSeverity": 3 // 1 <=> verbose, 2 <=> debug, 3 <=> info, 4 <=> warning, 5 <=> critical
+      },
+      "basic": {
+        "barcode": {
+          "formats": [
+            // all possible (supported) barcode Formats (see BARCODE_FORMATS_ALL)
+            "AZTEC",
+            "CODABAR",
+            "CODE_39",
+            "CODE_93",
+            "CODE_128",
+            "DATA_MATRIX",
+            "EAN_8",
+            "EAN_13",
+            "ITF",
+            "MAXICODE",
+            "PDF_417",
+            "QR_CODE",
+            "RSS_14",
+            "RSS_EXPANDED",
+            "UPC_A",
+            "UPC_E",
+            "UPC_EAN_EXTENSION",
+            "MSI",
+            "PLESSEY",
+            "IMB"
+          ]
+        },
+        "block": {
+          "material": {
+            // avoid using part without articledetail per country (of technican) although it is shown
+            //
+            "country": [
+              true
+            ]
+          }
+        },
+        // hide buttons on detail page: "RETURN", "TRANSFER", "ORDER"
+        // order(line) related operation e.g. 'Order Material' (ORDER),
+        //   'Reserved parts next appointment'
+        //   (ORDERLINE_PROPOSAL) or show quotation lines (ORDERLINE_QUOTATION)
+        // For material source: 'customerOwned'
+        //  Hide stock types: 'stock.type=' with given stock type after = to hide these types
+        //  For stock type: 'MobileStock', SparePartsCentral', 'Others'
+        //  Do not show stocks with other plants then engineers stock has: 'otherPlants'
+        // For no alert on missing stock: 'missingPart'
+        // Set 'stock.source.default=customerOwned' to have 'customerOwned' as default for material source, instead of standard 'engineerStock'
+        "hide_material_operation": [
+          /*
+          // StockModule - Button in StockItemDetails (TRANSFER, ORDER, RETURN)
+          "TRANSFER",
+          "ORDER",
+          "RETURN",
+          // hide tags for
+          "missingPart",
+          "joblist.tag.partsOrdered",
+          // hide stock for consumption by type
+          "customerOwned",
+          "stock.source.default=customerOwned", // set 'customerOwned' as default for material source (not active if "customerOwned" set)
+          "stock.type=MobileStock",
+          "stock.type=SparePartsCentral",
+          "stock.type=Others",
+          "otherPlants",                     
+          "ORDERLINE_PROPOSAL"  // hide proposal. Since 05.2025 shopping card menu item to reserve/order parts is hidden too
+          */
+        ],
+        "hide_pages": [
+          "jobFastTrackTab",
+          "outline.attachmentButton",
+          "outline.newtonDocumentsButton",
+          "OpenOnlinePageSalesforceServiceConsole",
+          "OpenOnlinePageSalesforceDashboardView",
+          "followUpAppointmentComponents.editPage",
+          "OpenOnlinePageFollowUpAppointment"
+        ],
+        "modules": [
+          "jobs",
+          "timesheet",
+          // simpler Version with clock-in, clock-out
+          //"timesheetbasic",
+          "material",
+          "resourceEquipmentView",
+          "online",
+          // configuration/setup "paste JSON" / with active "debug" always shown
+          "setup",
+          "notification"          
+        ],
+        "tabs": {
+          // Floating Action Button (FAB) and Quick Action Button (QAB) (T-25262):
+          // "part", "times", "service", "attachments", "checklist", "repaircodes", "service_item"  Default: all FAB are active.
+          "fab": [
+            "part",
+            "times",
+            "service",
+            "attachments",
+            "checklist",
+            "repaircodes",
+            "service_item"
+          ],
+          // Enable legacy (search bar always shown) (T-25262): ["part", "service", "repaircodes", "service_item"]. Default: empty/deactive
+          "legacy": {
+            "add": []
+          }
+        },
+        "view": {
+          // hide prices overall
+          "prices": [
+            true
+          ]
+        }
+      },
+      "order": {
+        "finish": {
+          "followup": {
+            //"mode": ["twoStep"], // only works for coke ? for other projects change 'finishFlowFollowUpSelectionImplementation' below at the end.
+            // conclusion - cancelled
+            "cancelled": [
+              // -> default
+              "2902",
+              "2915"
+              // <- default
+            ],
+            // conclusion - completed
+            "completed": [
+              // -> default
+              "2901",
+              "2902",
+              "2903",
+              "2904",
+              "2905",
+              "2915",
+              "2950",
+              "2951",
+              "2952",
+              "2953",
+              "2954",
+              "2955"
+              // <- default
+            ],
+            // conclusion - rejected
+            "rejected": [
+              // -> default
+              "2903"
+              // <- default
+            ],
+            "supportcompleted": [
+              // -> default
+              "2902",
+              "2903",
+              "2915",
+              "2957"
+              // <- default
+            ]
+          },
+          "hide": [
+            ""
+          ], //e.g ["invoice"] => hide invoice step in finish flow, unconditionally
+          "wizard": {
+            "saveonback": "1"
+          }
+        }
+      },
+      "parts": {
+        "search": {
+          // show fields in article result list
+          "fields": [
+            // "listprice" --> deprecated due to priceCalculation / shown in OrderLineEditPage
+            "serialized",
+            "articlesearch",
+            "class",
+            "type"
+          ]
+        }
+      },
+      "services": {
+        "search": {
+          // show fields in article result list
+          "fields": [
+            // "listprice" --> deprecated due to priceCalculation / shown in OrderLineEditPage
+            "serialized",
+            "articlesearch",
+            "class",
+            "type"
+          ]
+        }
+      },
+      "view": {
+        "filter": {
+          "job_list": [
+            "currentJob",
+            "today",
+            "tonight",
+            "tomorrow",
+            "nextSevenDays",
+            "lastSevenDays",
+            "yesterday",
+            "notCompleted",
+            "completed",
+            "preCheck",
+            "preChecked"
+          ],
+          "jobs": {
+            // check for empty lists and take fallback
+            "fallback": [
+              "currentJob",
+              "today",
+              "notCompleted"
+            ]
+          },
+          // master solution - blacklist
+          "resource_appointment_types_hidden": [
+            "7404"
+          ],
+          // original product solution - whitelist
+          "resource_appointment_types_to_show": [
+            "7449"
+          ]
+        },
+        "ib": {
+          "fields": [
+            // switch to name instead of description (text_de, ...)
+            "xx-productmodel.name",
+            "serialno.trim",
+            "idext",
+            "building",
+            "floor",
+            "room",
+            "name"
+          ]
+        },
+        "job": {
+          // list of status to hide appointments with this status in some filters. Suggested value: "5507" cancelled/storniert
+          "hide_status": ["5507"],
+          "important": {
+            // Name of checklists shown as cards on separate Tab (importantChecklistTabTabExtension)
+            "checklists": []
+          }
+        },
+        "jobheader": {
+          // default: ["AP.startend", "SR.name"] (default also actived if only 1 field is defined)
+          // additional or other fields in Job Header:
+          // ["ORD.type", "ORD.name", "IB.idext", "IB.idint", "IB.prodName"]
+          // first field = line1, second field = line2 BOLD, other added to line2 delimted " • "
+          // For backward compatibiliy: if 'view.order.fields' includes deprecated 'tab' it will be added as 'ORD.name'
+          "fields": [
+            "AP.startend",            
+            "SR.name",
+            "ORD.type"
+          ]
+        },
+        "order": {
+          "enable": {
+            // field readonly
+            "invoicing_type": [
+              true
+            ]
+          },          
+          "fields": [
+            "tab",
+            "name", 
+            "drivetime",
+            "counterinfo",
+            "errortext",
+            "internalinfo",
+            "description",
+            "cardAdditionalCustomerInfo",
+            "priority",
+            "client",
+            "tagAdditionalCustomerInfo",                     
+            "tagCriticalHistory",
+            "showProperties"            
+          ],
+          "search": [
+            // activate search bar in ALL filter
+            "#ON",
+            // switch to new "inline" mode
+            "#INLINE",
+            // suppress filter in ALL view
+            "!xx-all"
+          ]
+        },
+        "orderitem": {
+          "fields": [
+            // in addition to room/building ...
+            "errortext",
+            "idint", // not yet included due to T-42918 
+            "idext"
+          ]
+        },
+        "orderline": {
+          "edit": {
+            // allow decimals for Qty / fallback if no fsoMaterialUnitQtyRules is defined
+            // also used for discounts
+            "qty_decimals": [
+              // default
+              2
+            ]
+          },
+          "fields": [
+            // default
+            "invoicingtype",
+            // show (selected) stock
+            "stock",
+            // special for BG1, stock used to identify technician (two-man-job)
+            "stockservice"
+          ]
+        },
+        // Stock Module
+        "stockitem": {
+          // list of status for booked movements
+          "booked": {
+            "status": [
+              // default
+              "5403",
+              // default
+              "5408"
+            ]
+          },
+          // list of status for pending movements
+          "pending": {
+            "status": [
+              // default
+              "5402",
+              // default
+              "5407"
+            ]
+          }
+        },
+        "timereport": {
+          // time tab/timesheet view: fields for time report entry/card
+          // example values: ["IB.idext", "IB.idint", "IB.building", "IB.room", "IB.floor", "IB.serialno", "IB.serialno.trim", "type", "duration", "distanceInline", "ORD.name"]
+          // deprecated: "appId", "ORD.name.footer", "ORD.account", "name", "start". Instead of "appId", "ORD.name.footer" use "ORD.name"
+          // default (if not set): ["type", "mileage", "description", "duration", "distanceInline", "ORD.name"]
+          "fields": [
+            "type",
+            "mileage",
+            "description",
+            "duration",
+            "type",
+            "distanceInline",
+            "ORD.name",
+            "compensationType"
+          ]
+        }
+      }
+    }
+  }
+]

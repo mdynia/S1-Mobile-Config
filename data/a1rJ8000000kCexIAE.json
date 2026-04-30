@@ -1,0 +1,264 @@
+[
+{
+    "type": "configuration",
+    "values": {
+      // Enable search on parts/services/service-items tab
+      "itemSearch": "enable",
+      // Enable search on checklist tab
+      "checklistSearch": "extended", // options: enable | disable | extended
+      //Enables selection on followup2 when only 1 value available
+      "followUp2ShowOnlyElem": "disable",
+      /**
+     * Defines if page added to finishing wizard to decide the shipping location of the ordered parts
+     */
+      "shiptoPage": "enable",
+      /**
+     * SER__MaterialSource__c can be read-only. Sets if the shipto page saves to this field
+     */
+      "saveToOrderLineMaterialSource": "enable",
+      /**
+     *  Material movement Type can be read-only. Sets if material movement is saved in shipto page
+     */
+      "saveDeliveryAddressOrderrequestType": "enable",
+      //Enable search bar on device list
+      "deviceListSearchBar": "enable", // options : enable | disable
+      //Fields the device search checks
+      // "*" means all fields are checked
+      "deviceListBarSearchedFields": {
+        "orderItemFields": [
+          "*"
+        ],
+        "installedBaseFields": [
+          "*"
+        ],
+        "productModelFields": [
+          "*"
+        ]
+      },
+      // Enables or deactivates resource geo location tracking by motion detection.
+      //If active, every movement of the FSE over a distance larger than GeolocationDistance generates a new location information.
+      "FSELocation": "enable",
+      // Specifies the distance (in meters) the user has to move, before the location is updated. Sets 'distance' value in TrackingOptions.
+      "FSELocationDistance": 100,
+      // Specifies if and how detailed the FSE location (motion) history is stored in ResourceInfo
+      // Values: full | bucket | span | off
+      "FSELocationLog": "bucket",
+      // Specifies the accuracy of the geolocation information. The values map directly to the respective values in the platform.
+      // Values: highAccuracy | balancedPowerAccuracy | lowPower
+      "GeoLocationAccuracy": "highAccuracy",
+      // Specifies the maximum time between two consecutive motion updates, so they are interpreted as a continuos movement.
+      // Time interval in minutes
+      "MotionSequenceInterval": 5,
+      // Specifies if and how the location is recorded in the resource object and the work status log, when the appointment work status changes.
+      // Value: geo | IBL | off
+      "WorkStatusLocation": "geo",
+      //  activate work status history- Enables or deactivates recording of the work status history.
+      "WorkStatusLog": "enable",
+      // TODO: document ----  complex to configure - ask Service Solution developer for more information
+      //"priceUIOptions": DefaultPriceUiOptions,
+      "createOrderOptions": {
+        "durationSteps": 5,
+        "initialDurationStep": 15,
+        "maxLengthErrorDescription": 131072
+      },
+      "currencyFallback": "EUR",
+      "deviceHandlingOptions": {
+        "allowDeviceCreation": true, // default: true, set false to disallow creation of new devices, see T-33744
+        // 0 = DEVICE_ID,
+        // 1 = SERIAL_NUMBER,
+        "visibleDeviceIdentifier": 1
+      },
+      // real : SER__Start__c and SER__End__c
+      // communicated: SER__Communicated_time_window_start__c and SER__Communicated_time_window_end__c
+      "appointmentTimesField": "communicated", // "real" | "communicated"
+      //  activate work status dialog (T-29111: Loc Centr FS - FSE Work Status Handling)
+      "enableJobStatus": "enable",
+      // Enables or deactivates the time suggestion options in time edit page
+      "WorkStatusTimeInput": "enable",
+      // Defines the radius of the geofence in meters.
+      "GeoFenceRadius": 150,
+      // The GeoFence parameter controls whether the geofencing feature is activated. When set to enable, geofencing functionality is enabled.
+      "GeoFence": "enable",
+      // The GeoFenceTimeInput parameter allows the logs of geofencing events to be shown on the Edit page for time reporting purposes. If enable, the geofence logs will be displayed to assist in time reporting entries.
+      "GeoFenceTimeInput": "enable",
+      // GeoFenceLog is a configuration used to record the logs for geofence events (entering and leaving the geofence)
+      "GeoFenceLog": "enable",
+      // OrdersAtLocation defines wether "Orders at Location" menu item should be shown or not, values: enable, disable (= default)
+      "OrdersAtLocation": "enable",
+      // Enable or Disable the set work status page (default: disabled)
+      "SetWorkStatusPage": "enable",
+      /// Values can be set "onlyServiceRecipient", "onlyOrderContact", "serviceRecipientOrOrderContact", "orderContactOrServiceRecipient"
+      "DefineCustomerToMessage": "onlyServiceRecipient",
+      // Values can be set "No", "SMS", "Email"
+      "PresetCommunicationMedium": "SMS",
+      "CommunicationMediumOptions": [
+        "sms",
+        "email"
+      ],
+      // show message to customer section on set work status page
+      "ShowCustomerMessage": true,
+      // price calculation module going to be enable or disable by this configuration
+      "PriceCalculationModule": "enable",
+      // Create a configuration which allows Business Admin to select the scope of the search for adding parts to a job
+      //- ‘partsOnly’ → default, the parts view is used to search for part when adding parts
+      //- ‘partsAndProducts’ → when active, the new view will be used in the search. this way Parts and Products will be shown as search results
+      "SearchScopeForAddingParts": "partsOnly",
+      // Contacts quick search in job contacts list page, ServiceReportRecipientsView and QuotationRecipientsView ('enable' | 'disable')
+      "contactsQuickSearch": "enable",
+      // Define the character limit for activities shown in device card
+      "characterLimitForActivitiesInDeviceCard": 150,
+      // Define the max number of activities shown in device card
+      "maxNumberOfActivitiesInDeviceCard": 8,
+      /* 
+      // TODO: currrently not fully supported as StockIcons needs API value which cannot be set from outside -> refacotring needed
+      "emailRecipientsGroupsServiceReport": [
+        {
+          "name": "Location",
+          "caption": "contactListPage.categoryLocation",
+          "rank": 10,
+          "icon": StockIcons.Location,
+        },
+        {
+          "name": "Order",
+          "caption": "contactListPage.categoryOrder",
+          "rank": 20,
+          "icon": StockIcons.Briefcase,
+        },
+        {
+          "name": OrderRoleType.SERVICERECIPIENT,
+          "caption": "contactListPage.category50301",
+          "rank": 1,
+          "icon": StockIcons.Persons,
+        },
+        {
+          "name": OrderRoleType.CALLER,
+          "caption": "contactListPage.category50302",
+          "rank": 110,
+          "icon": StockIcons.Persons,
+        },
+        {
+          "name": OrderRoleType.INVOICE_RECIPIENT,
+          "caption": "contactListPage.category50303",
+          "rank": 120,
+          "icon": StockIcons.Persons,
+        },
+        {
+          "name": OrderRoleType.PAYER,
+          "caption": "contactListPage.category50304",
+          "rank": 130,
+          "icon": StockIcons.Persons,
+        },
+      ], */
+      /**
+       * Implementation of the followup selection to use in job finish, see T-33600
+       * default:     Select only followUp2 with the corresponding followUp1 value being determined automatically
+       * twoStep:     Select both followUp1 and followUp2 manually
+       */
+      "finishFlowFollowUpSelectionImplementation": "twoStep",
+      // "FULL" | "PREFIX" | "#"
+      "idFormat": "FULL",
+      "jobOptions": {
+        "disableEditInvoiceWorkTextOnPage": true, //  Default false. True disables inline editing of invoicing text on tab work/invoice description/Rechnungstext (edit field replaced by InvoiceTextCard with add button) T-37110
+        "disableEditReportRecipients": false,
+        "history": {
+          "critical": {
+            "count": 2,
+            "month": 2,
+            "showTag": true
+          }
+        },
+        /**
+         * invoice text target = appointment.order.invoicingText
+         * supporting engineer can't see finishFlow invoice step
+         * supporting engineer can't edit invoice text
+         */
+        // 'INVOICINGTEXT_RESPONSIBLE',
+        /**
+         * invoice text target = appointment.workDescription
+         * supporting engineer can't see finishFlow invoice step
+         * supporting engineer can't see invoice text
+         */
+        // 'WORKDESCRIPTION_RESPONSIBLE',
+        /**
+         * invoice text target = appointment.workDescription
+         * everyone can see finishFlow invoice step
+         * everyone can see and edit invoice text
+         */
+        // 'WORKDESCRIPTION_ALL',
+        /**
+         *  / show both cards in finish
+         * invoice text target = appointment.order.invoicingText
+         * invoice text target = appointment.workDescription
+         *
+         * supporting engineer can't see finishFlow invoice step
+         * supporting engineer can't edit invoice text
+         */
+        // 'INV_AND_WORK_RESPONSIBLE',
+        /**
+         * x__common-master / show both cards in finish
+         * invoice text target = appointment.order.invoicingText
+         * invoice text target = appointment.workDescription
+         *
+         * everyone can see finishFlow invoice step
+         * everyone can see and edit invoice text
+         */
+        // 'INV_AND_WORK_ALL',
+        "invoicingTextConfig": "INVOICINGTEXT_RESPONSIBLE",
+        "jobListRemarksMaxLength": 150,
+        "requiredTimeReportTypes": [
+          "work"
+        ],
+        "showFastTrack": false
+      },
+      /**
+       * 0 = INVOICE
+       * 1 = JOB
+       */
+      "jobReportMode": 1, // new default since 11.01.2024, so same handling (in servicereport) as in version 2023.11 (before ReportType.INVOICE)
+      "jobTemplateOptions": {
+        "confirmation": {
+          "allowPersonalTemplates": true
+        }
+      },
+      "orderItemViewOptions": {
+        "installedBaseFieldForTitle": "SER__SerialNo__c",
+        "orderItemListSort": "ordinal",
+        "orderItemSortMode": "orderItemId" // sort order items by their ID; remove to use the old sorting by building/floor/room/product model
+      },
+      "partsAndServices": {
+        "viewType": "separated" // default:'separated', use 'combined" for service_item
+      },
+      "checklist": {
+        "allowFiltering": "enable",
+        "enableEditOfChecklistsFromOtherResources": "enable"
+      },
+      "installedBaseHierarchy": {
+        /** cardStyle: 'inline' or 'list' (default: 'list') */
+        "cardStyle": "list"
+      },
+      "priceCalculationOptions": {
+        "clearingClassMultiplicator": {
+          "170001": 1
+        },
+        "contractConditionAccountRole": "50301",
+        "relevantOrderLineTypes": [
+          "52701",
+          "52702"
+        ]
+      },
+      //  activate reading geo location in job list (intermediate functionality, W-14694)
+      "readGeoLocationInJobList": true,
+      // 'uiPreviewAndReport' | 'uiPreviewAndLegacyFields' | 'uiPreviewAndReportLegacyFields' | 'htmlPreviewAndReport'
+      "serviceReportMode": "uiPreviewAndReport",
+      /**
+        * Enable Activities on Order Items
+        * Can be turned off for some sub features
+        * Time Reports are configured by configTimeSheet.activitiesAsTimeReportType 
+        */
+      "activitiesOnOrderItems": "enable",
+      "allowAddingUnplannedActivities": "enable",
+      "enableActivitySelectionPartsAndServices": "enable",
+      "showProposalDiscardButton": true
+    }
+  }
+]

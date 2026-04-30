@@ -1,0 +1,8 @@
+[
+  {
+    "type": "PartialMaterialProposalConfig",
+    "values": {
+      "partialProposalsEnabled": true
+    }
+  }
+]
