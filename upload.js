@@ -25,6 +25,10 @@ const DATA_DIR = path.join(__dirname, "data");
     const id = path.basename(file, ".json");
     const filePath = path.join(DATA_DIR, file);
 
+    if (id == 'default') {
+      console.log(`⚠️ Skipping ${file} (ID ${id}) as this is default config`);
+      continue;
+    }
     let payload;
     try {
       payload = fs.readFileSync(filePath, "utf8");

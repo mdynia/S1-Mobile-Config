@@ -20,12 +20,19 @@ const DATA_DIR = path.join(__dirname, "data");
   );
 
   result.records.forEach(config => {
-    const id = config.Id;
+    let id = config.Id;
 
     if (!id || !config.SER__Payload__c) {
       console.warn("⚠️ Skipping record with missing ID or payload:", config.Id);
       return;
     }
+
+
+    if (id == 'a1r4H00000QLtSIQA1') {
+      console.log(`⚠️ Default config in (ID ${id}) renamed default config`);
+      id = 'default';    
+    }
+
 
     const filePath = path.join(DATA_DIR, `${id}.json`);
 
