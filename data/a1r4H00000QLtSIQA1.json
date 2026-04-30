@@ -109,7 +109,7 @@
           "online",
           // configuration/setup "paste JSON" / with active "debug" always shown
           "setup",
-          "notification"
+          "notification"          
         ],
         "tabs": {
           // Floating Action Button (FAB) and Quick Action Button (QAB) (T-25262):
@@ -261,7 +261,7 @@
           "hide_status": [],
           "important": {
             // Name of checklists shown as cards on separate Tab (importantChecklistTabTabExtension)
-            "checklists": []
+            "checklists": ["SafetyChecklist PTRA"]
           }
         },
         "jobheader": {
@@ -271,8 +271,9 @@
           // first field = line1, second field = line2 BOLD, other added to line2 delimted " • "
           // For backward compatibiliy: if 'view.order.fields' includes deprecated 'tab' it will be added as 'ORD.name'
           "fields": [
-            "AP.startend",
-            "SR.name"
+            "AP.startend",            
+            "SR.name",
+            "ORD.type"
           ]
         },
         "order": {
@@ -290,20 +291,20 @@
             "name", // ORD.Name #123 in Job List
             "drivetime",
             "counterinfo",
-            "errortext",
-            "internalinfo",
             "description",
+            "internalinfo",
+            "errortext",
             "cardAdditionalCustomerInfo",
             "priority",
-            "client",
+            //"client",
             "tagAdditionalCustomerInfo",
-            "tagInternalInfo",
-            "tagDescription",
-            "tagErrorText",
+            //"tagInternalInfo",
+            //"tagDescription",
+            //"tagErrorText",
             //"customerWish",
             "tagCriticalHistory",
-            "showProperties", // show properties in job card.
-            "showRemarks" // show remarks in job card
+            "showProperties" // show properties in job card.
+            //"showRemarks" // show remarks in job card
           ],
           "search": [
             // activate search bar in ALL filter
@@ -732,6 +733,7 @@
       "enableJobStatus": "enable",
       // Enables or deactivates the time suggestion options in time edit page
       "WorkStatusTimeInput": "enable",
+
       // Defines the radius of the geofence in meters.
       "GeoFenceRadius": 150,
       // The GeoFence parameter controls whether the geofencing feature is activated. When set to enable, geofencing functionality is enabled.
@@ -747,7 +749,7 @@
       /// Values can be set "onlyServiceRecipient", "onlyOrderContact", "serviceRecipientOrOrderContact", "orderContactOrServiceRecipient"
       "DefineCustomerToMessage": "onlyServiceRecipient",
       // Values can be set "No", "SMS", "Email"
-      "PresetCommunicationMedium": "no",
+      "PresetCommunicationMedium": "SMS",
       "CommunicationMediumOptions": [
         "sms",
         "email"
