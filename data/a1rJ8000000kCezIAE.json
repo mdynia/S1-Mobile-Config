@@ -536,7 +536,7 @@
           "itemLevel": true,
           "key": "workDescriptionEditTab",
           "orderLevel": true,
-          "show": true,
+          "show": false,
           "sort": 1250
         },
         {

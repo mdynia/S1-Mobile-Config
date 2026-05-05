@@ -90,7 +90,7 @@
       /// Values can be set "onlyServiceRecipient", "onlyOrderContact", "serviceRecipientOrOrderContact", "orderContactOrServiceRecipient"
       "DefineCustomerToMessage": "onlyServiceRecipient",
       // Values can be set "No", "SMS", "Email"
-      "PresetCommunicationMedium": "SMS",
+      "PresetCommunicationMedium": "sms",
       "CommunicationMediumOptions": [
         "sms",
         "email"
